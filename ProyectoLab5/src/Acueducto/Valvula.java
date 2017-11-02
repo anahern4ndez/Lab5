@@ -13,6 +13,13 @@ import java.util.ArrayList;
  */
 public class Valvula {
     private ArrayList<String> listaValvulas;
-    String municipio;
+    private String municipio;
+    private long cantHab;
+    
+    Valvula(String municipio, long habitantes)
+    {
+        this.municipio=municipio;
+        this.cantHab = habitantes;
+    }
     
 }
