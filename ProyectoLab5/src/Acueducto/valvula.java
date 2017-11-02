@@ -11,8 +11,8 @@ import java.util.ArrayList;
  *
  * @author ottoalexander
  */
-public class valvula {
-    private ArrayList<String> listaVuelos;
+public class Valvula {
+    private ArrayList<String> listaValvulas;
     String municipio;
     
 }
