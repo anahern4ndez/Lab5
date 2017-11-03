@@ -9,6 +9,11 @@ package Acueducto;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import org.mongodb.morphia.Morphia;
+import org.mongodb.morphia.Datastore;
+import org.mongodb.morphia.query.Query;
+import com.mongodb.MongoClient;
+import java.util.List;
 
 public class AcueductoUI extends javax.swing.JFrame {
 
@@ -19,6 +24,11 @@ public class AcueductoUI extends javax.swing.JFrame {
     public AcueductoUI() {
         initComponents();
         acueducto = new Acueducto();
+        
+        MongoClient mongo = new MongoClient();
+        Morphia morphia = new Morphia();
+        morphia.map(Acueducto.class).map(Valvula.class).map(Tanque.class).map(Cilindrico.class).map(Ortogonal.class).map(Cubico.class); // clases a guardar
+        Datastore ds = morphia.createDatastore(mongo, "Acueducto");//Creacion de la base de datos
         
     }
 
@@ -48,7 +58,7 @@ public class AcueductoUI extends javax.swing.JFrame {
         radiotxt = new javax.swing.JTextField();
         altoCil = new javax.swing.JLabel();
         altocilin = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        agregarTanque = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
         jLabel14 = new javax.swing.JLabel();
         municipio1 = new javax.swing.JTextField();
@@ -127,7 +137,12 @@ public class AcueductoUI extends javax.swing.JFrame {
 
         altoCil.setText("Altura");
 
-        jButton1.setText("Agregar tanque");
+        agregarTanque.setText("Agregar tanque");
+        agregarTanque.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                agregarTanqueActionPerformed(evt);
+            }
+        });
 
         jLabel13.setText("Nombre del municipio");
 
@@ -175,7 +190,7 @@ public class AcueductoUI extends javax.swing.JFrame {
                                         .addComponent(altocilin, javax.swing.GroupLayout.PREFERRED_SIZE, 79, javax.swing.GroupLayout.PREFERRED_SIZE))))
                             .addGroup(jPanel8Layout.createSequentialGroup()
                                 .addGap(75, 75, 75)
-                                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(agregarTanque, javax.swing.GroupLayout.PREFERRED_SIZE, 155, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 172, Short.MAX_VALUE)
                         .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(municipio6, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -262,7 +277,7 @@ public class AcueductoUI extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel8Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton1)
+                        .addComponent(agregarTanque)
                         .addGap(18, 18, 18)))
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(municipio8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -275,7 +290,7 @@ public class AcueductoUI extends javax.swing.JFrame {
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(municipio10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(habitantes10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(19, Short.MAX_VALUE))
+                .addContainerGap(64, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout ingresarTanqueLayout = new javax.swing.GroupLayout(ingresarTanque.getContentPane());
@@ -285,7 +300,7 @@ public class AcueductoUI extends javax.swing.JFrame {
             .addGroup(ingresarTanqueLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
         ingresarTanqueLayout.setVerticalGroup(
             ingresarTanqueLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -560,17 +575,18 @@ public class AcueductoUI extends javax.swing.JFrame {
             jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jPanel6Layout.createSequentialGroup()
-                            .addComponent(jLabel9)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(aguaCA, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(8, 8, 8))
-                        .addGroup(jPanel6Layout.createSequentialGroup()
-                            .addGap(27, 27, 27)
-                            .addComponent(jLabel8)
-                            .addGap(51, 51, 51)
-                            .addComponent(regionCA, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel6Layout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addGroup(jPanel6Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(aguaCA, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(8, 8, 8))
+                            .addGroup(jPanel6Layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addGap(51, 51, 51)
+                                .addComponent(regionCA, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel6Layout.createSequentialGroup()
                         .addGap(43, 43, 43)
                         .addComponent(mostrarAgua, javax.swing.GroupLayout.PREFERRED_SIZE, 283, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -777,7 +793,7 @@ public class AcueductoUI extends javax.swing.JFrame {
     }//GEN-LAST:event_seguirNTanqueActionPerformed
 
     private void mostrarValvulasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarValvulasActionPerformed
-                cantidadValvulas.setText(String.valueOf(acueducto.valvulasAbiertasC()));
+        cantidadValvulas.setText(String.valueOf(acueducto.valvulasAbiertasC()));
     }//GEN-LAST:event_mostrarValvulasActionPerformed
 
     private void mostrarTanquesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarTanquesActionPerformed
@@ -790,8 +806,12 @@ public class AcueductoUI extends javax.swing.JFrame {
 
     private void mostrarAguaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarAguaActionPerformed
         String region = regionCA.getText();
-        aguaCA.setText(String.valueOf(acueducto.getAguaRegion(region))+ "m^2");
+        aguaCA.setText(String.valueOf(acueducto.getAguaRegion(region))+ "m^3");
     }//GEN-LAST:event_mostrarAguaActionPerformed
+
+    private void agregarTanqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarTanqueActionPerformed
+        
+    }//GEN-LAST:event_agregarTanqueActionPerformed
 
     /**
      * @param args the command line arguments
@@ -830,6 +850,7 @@ public class AcueductoUI extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton abrirValvula;
+    private javax.swing.JButton agregarTanque;
     private javax.swing.JTextField aguaCA;
     private javax.swing.JLabel altoCil;
     private javax.swing.JLabel altoO;
@@ -855,7 +876,6 @@ public class AcueductoUI extends javax.swing.JFrame {
     private javax.swing.JTextField habitantes8;
     private javax.swing.JTextField habitantes9;
     private javax.swing.JDialog ingresarTanque;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;

@@ -32,7 +32,7 @@ public class Tanque {
         {
             habitantes += valvulas[i].getcant_Habitantes();
         }
-        habitantes *= 2;
+        habitantes *= 2;// ya que se determinó que cada habitante consumiría 2m^3 de agua. 
         cantAguaDisponible = capacidad - habitantes;
         if (cantAguaDisponible > 0.0)
         {
