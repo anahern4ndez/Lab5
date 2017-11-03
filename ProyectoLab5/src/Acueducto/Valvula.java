@@ -20,6 +20,6 @@ public class Valvula {
     {
         this.municipio=municipio;
         this.cantHab = habitantes;
-    }
-    
+    } 
+   
 }
