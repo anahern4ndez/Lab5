@@ -1,10 +1,12 @@
-
+/**
+ *  @author Ana Lucia Hernandez (17137)
+ *          Alexander Trujillo (17189)
+ *  @since 02.11.17
+ *  Clase padre que modela toda la informacion general de un tanque cualquiera
+ * Tanque.java
+ **/
 package Acueducto;
 
-/**
- *
- * @author Ana
- */
 public class Tanque {
     protected String numero;
     protected double capacidad;
@@ -25,11 +27,38 @@ public class Tanque {
     }
     public void calcularPorcentaje()
     {
-        
+        double habitantes = 0;
+        for(int i=0; i<10; i++)
+        {
+            habitantes += valvulas[i].getcant_Habitantes();
+        }
+        habitantes *= 2;
+        cantAguaDisponible = capacidad - habitantes;
+        if (cantAguaDisponible > 0.0)
+        {
+            porcentajeAguaDisponible = (cantAguaDisponible * 100.0)/capacidad;
+        }
+        else 
+        {
+            porcentajeAguaDisponible =0.0;
+        }
+       
     }
     public void llenarTanque()
     {
         porcentajeAguaDisponible = 100.0;
+    }
+    public String getID()
+    {
+        return numero;
+    }
+    public String getRegion()
+    {
+        return region;
+    }
+    public Valvula[] getValvulas()
+    {
+        return valvulas;
     }
     public double getPorcentaje()
     {

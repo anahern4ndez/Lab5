@@ -1,14 +1,132 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+/**
+ *  @author Ana Lucia Hernandez (17137)
+ *          Alexander Trujillo (17189)
+ *  @since 02.11.17
+ *  Clase principal que realiza los calculos y guarda los datos relevantes
+ * Acueducto.java
+ **/
 package Acueducto;
 
-/**
- *
- * @author Ana
- */
-public class Acueducto {
-    
+import java.util.ArrayList;
+public class Acueducto 
+{
+    private ArrayList<Tanque> contenedores;
+    public Acueducto()
+    {
+        contenedores = new ArrayList<>();
+    }
+    public void nuevoCilindrico(String ID, String[] municipios, long[] habitantes, String region, double radio, double altura)
+    {
+        Tanque nuevo = new Cilindrico(ID, municipios, habitantes, region, radio, altura);
+        contenedores.add(nuevo);
+    }
+    public void nuevoCubico(String ID, String[] municipios, long[] habitantes, String region, double lado)
+    {
+        Tanque nuevo = new Cubico(ID, municipios, habitantes, region, lado);
+        contenedores.add(nuevo);   
+    }
+    public void nuevoOrtogonal(String ID, String[] municipios, long[] habitantes, String region, double largo, double ancho, double alto)
+    {
+        Tanque nuevo = new Ortogonal(ID, municipios, habitantes, region, largo, ancho, alto);
+        contenedores.add(nuevo);   
+    }
+    public String obtenerTanques()
+    {
+        String cilindricos = "TANQUES CILINDRICOS: ";
+        String cubo = "\n TANQUES CUBICOS: ";
+        String ort = "\n TANQUES ORTOGONALES: ";
+        for (Tanque tanque: contenedores)
+        {
+            if (tanque instanceof Cilindrico)
+            {
+                cilindricos += "\n\tTanque número ";
+                cilindricos += ((Cilindrico)tanque).getID();
+            }
+            if (tanque instanceof Cubico)
+            {
+                cubo += "\n\tTanque número ";
+                cubo += ((Cubico)tanque).getID();
+            }
+            if (tanque instanceof Ortogonal)
+            {
+                ort += "\n\tTanque número ";
+                ort += ((Ortogonal)tanque).getID();
+            }
+        }
+        return cilindricos + cubo + ort;
+    }
+    public long valvulasAbiertasC()
+    {
+        long numero =0;
+        for (Tanque tanque: contenedores)
+        {
+            if (tanque instanceof Cilindrico)
+            {
+                for(int i=0; i<10; i++)
+                {
+                    if (((Cilindrico)tanque).getValvulas()[i].getEstado() == true)   
+                    {
+                        numero +=1;
+                    }
+                }
+            }
+        }
+        return numero;
+    }
+    public void abrirValvula(String IDtanque, String municipio, String fecha)
+    {
+        for (Tanque tanque: contenedores)
+        {
+            if (tanque.getID().equals(IDtanque))
+            {
+                for(int i=0; i<10; i++)
+                {
+                    if (tanque.getValvulas()[i].getMunicipio().equals(municipio))   
+                    {
+                        tanque.getValvulas()[i].setEstado(true);
+                        tanque.getValvulas()[i].fechaAbierto(fecha);
+                    }
+                }
+            }
+        }
+    }
+    public void cerrarValvula(String IDtanque, String municipio, String fecha)
+    {
+        for (Tanque tanque: contenedores)
+        {
+            if (tanque.getID().equals(IDtanque))
+            {
+                for(int i=0; i<10; i++)
+                {
+                    if (tanque.getValvulas()[i].getMunicipio().equals(municipio))   
+                    {
+                        tanque.getValvulas()[i].setEstado(true);
+                        tanque.getValvulas()[i].fechaCerrado(fecha);
+                    }
+                }
+            }
+        }
+    }
+    public double getAguaRegion(String region)
+    {
+        double agua =0;
+        for (Tanque tanque: contenedores)
+        {
+            if (tanque.getRegion().equals(region))
+            {
+                agua = tanque.getAguaRestante();
+            }
+        }
+        return agua;
+    }
+    public void llenarTanque(String ID)
+    {
+        for (Tanque tanque: contenedores)
+        {
+            if (tanque.getID().equals(ID))
+            {
+                tanque.llenarTanque();
+            }
+        }
+    }
 }
