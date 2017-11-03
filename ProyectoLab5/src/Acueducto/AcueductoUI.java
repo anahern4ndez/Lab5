@@ -25,11 +25,6 @@ public class AcueductoUI extends javax.swing.JFrame {
         initComponents();
         acueducto = new Acueducto();
         
-        MongoClient mongo = new MongoClient();
-        Morphia morphia = new Morphia();
-        morphia.map(Acueducto.class).map(Valvula.class).map(Tanque.class).map(Cilindrico.class).map(Ortogonal.class).map(Cubico.class); // clases a guardar
-        Datastore ds = morphia.createDatastore(mongo, "Acueducto");//Creacion de la base de datos
-        
     }
 
     /**

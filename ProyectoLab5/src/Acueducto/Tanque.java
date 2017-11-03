@@ -7,7 +7,13 @@
  **/
 package Acueducto;
 
+import org.bson.types.ObjectId;
+import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Id;
+
+@Entity
 public class Tanque {
+    @Id private ObjectId id;
     protected String numero;
     protected double capacidad;
     protected Valvula[] valvulas;

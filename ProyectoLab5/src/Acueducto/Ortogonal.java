@@ -7,8 +7,13 @@
  **/
 package Acueducto;
 
+import org.bson.types.ObjectId;
+import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Id;
+
+@Entity
 public class Ortogonal extends Tanque 
-{
+{@Id private ObjectId id;
     private double largo;
     private double ancho;
     private double alto;

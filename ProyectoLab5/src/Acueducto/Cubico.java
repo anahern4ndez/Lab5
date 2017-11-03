@@ -7,9 +7,14 @@
  **/
 package Acueducto;
 
+import org.bson.types.ObjectId;
+import org.mongodb.morphia.annotations.Entity;
+import org.mongodb.morphia.annotations.Id;
+
+@Entity
 public class Cubico extends Tanque 
 {
-    
+    @Id private ObjectId id;
     private double lado;
     
     public Cubico(String numero, String[] municipios, long[] habitantes, String region, double lado) 
