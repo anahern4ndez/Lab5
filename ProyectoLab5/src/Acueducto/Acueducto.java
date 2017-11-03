@@ -29,7 +29,7 @@ public class Acueducto
     {
         Tanque nuevo = new Ortogonal(ID, municipios, habitantes, region, largo, ancho, alto);
         contenedores.add(nuevo);   
-    }
+    }/**
     public String obtenerTanques()
     {
         String cilindricos = "TANQUES CILINDRICOS: ";
@@ -54,7 +54,7 @@ public class Acueducto
             }
         }
         return cilindricos + cubo + ort;
-    }
+    }**/
     public long valvulasAbiertasC()
     {
         long numero =0;

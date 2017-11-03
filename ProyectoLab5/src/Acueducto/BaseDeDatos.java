@@ -8,8 +8,11 @@
 package Acueducto;
 
 import com.mongodb.MongoClient;
+import java.util.List;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
+import org.mongodb.morphia.query.Query;
+import org.mongodb.morphia.query.QueryResults;
 
 public class BaseDeDatos {
     private Acueducto acueducto;
@@ -43,6 +46,38 @@ public class BaseDeDatos {
             Tanque tanque = new Ortogonal(numero, municipios, habitantes, region, largo, ancho, alto);
             ds.save(tanque);
         }
+    }
+    public String buscarTanques()
+    {
+        String tanques ="";
+        Query<Tanque> query = ds.createQuery(Tanque.class); // todos los hoteles
+        
+        List<Tanque> contenedores = query.asList();
+        System.out.println("Todos los Hoteles");
+        for (Tanque tanque: contenedores){
+            tanques += tanque;
+        }
+        return tanques;
+    }
+    public long valvulasC()
+    {
+        long valv = 0;
+        Query<Tanque> query = ds.createQuery(Tanque.class).retrievedFields(true,"cilindricoField");
+        List<Tanque> valvulasAbiertas = query.asList();
+ 
+     
+        for (Tanque cilindrico : valvulasAbiertas) 
+        {
+            for(int i =0; i<10; i++)
+            {
+               if (cilindrico.getValvulas()[i].getEstado() == true)
+                {
+                    valv +=1;
+                }
+            }
+
+        } 
+        return valv;
     }
     
     

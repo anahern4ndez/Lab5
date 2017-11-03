@@ -21,9 +21,11 @@ public class AcueductoUI extends javax.swing.JFrame {
      * Creates new form AcueductoUI
      */
     Acueducto acueducto;
+    BaseDeDatos db;
     public AcueductoUI() {
         initComponents();
         acueducto = new Acueducto();
+        db = new BaseDeDatos();
         
     }
 
@@ -792,7 +794,7 @@ public class AcueductoUI extends javax.swing.JFrame {
     }//GEN-LAST:event_mostrarValvulasActionPerformed
 
     private void mostrarTanquesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarTanquesActionPerformed
-        listaTanques.setText(acueducto.obtenerTanques());
+        listaTanques.setText(db.buscarTanques());
     }//GEN-LAST:event_mostrarTanquesActionPerformed
 
     private void llenarTanqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_llenarTanqueActionPerformed
