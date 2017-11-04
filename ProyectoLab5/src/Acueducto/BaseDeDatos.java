@@ -52,11 +52,11 @@ public class BaseDeDatos {
     {
         String tanques ="";
         Query<Tanque> query = ds.createQuery(Tanque.class);
-        
-        List<Tanque> bus = query.asList();
-        for (Tanque tanque: bus)
+        List<Tanque> busqueda = query.asList();
+        //"\n"+ tanque.getID() + "\n"+
+        for (Tanque tanque: busqueda)
         {
-            tanques += ("\n"+ tanque.getID() + "\n"+tanque.getRegion());
+            tanques += (tanque.getRegion());
         }
         return tanques;
     }
