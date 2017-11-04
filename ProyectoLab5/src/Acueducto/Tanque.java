@@ -8,19 +8,20 @@
 package Acueducto;
 
 import org.bson.types.ObjectId;
+import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Entity;
 import org.mongodb.morphia.annotations.Id;
 
 @Entity
 public class Tanque {
-    @Id private ObjectId id;
+    @Id protected ObjectId id;
     protected String numero;
     protected double capacidad;
-    protected Valvula[] valvulas;
     protected double porcentajeAguaDisponible;
     protected double cantAguaDisponible;
     protected String region; // region a la cual el tanque esta proveendo agua
-    
+    @Embedded
+    protected Valvula[] valvulas;
     public Tanque(String numero, String[] municipios, long[] habitantes, String region)
     {
         this.numero = numero;
@@ -30,8 +31,9 @@ public class Tanque {
         {
             valvulas[i]= new Valvula(municipios[i], habitantes[i]);
         }
+        calcularPorcentaje();
     }
-    public void calcularPorcentaje()
+    private void calcularPorcentaje()
     {
         double habitantes = 0;
         for(int i=0; i<10; i++)

@@ -730,15 +730,11 @@ public class AcueductoUI extends javax.swing.JFrame {
         catch (NumberFormatException e) {
         i=1;}
         
-        if(i==0){
+        if(i==0)
+        {
         ingresarTanque.pack();
         ingresarTanque.setVisible(true);
             System.out.println("An integer");
-        
-        
-        String[] habitantes = null;
-        
-        JTextField[] texto = new JTextField[10];
         
         if (String.valueOf(formaCB.getSelectedItem()).equals("Cúbico"))
         {
@@ -793,6 +789,7 @@ public class AcueductoUI extends javax.swing.JFrame {
             radiotxt.setVisible(true);
             altoCil.setVisible(true);
             altocilin.setVisible(true);
+           
         }}
         else{
             JOptionPane.showMessageDialog(null,"Solo puede ingresar numeros"); 
@@ -818,7 +815,33 @@ public class AcueductoUI extends javax.swing.JFrame {
     }//GEN-LAST:event_mostrarAguaActionPerformed
 
     private void agregarTanqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarTanqueActionPerformed
+        String[] municipios = new String[10];
+        long[] habitantes = new long[10];
         
+        JTextField[] texto = {municipio1,municipio2,municipio3,municipio4,municipio5,municipio6,municipio7,municipio8,municipio9,municipio10};
+        for (int t=0; t<1; t++)
+        {
+            municipios[t] = texto[t].getText();
+        }
+        JTextField[] hab = {habitantes1,habitantes2,habitantes3,habitantes4,habitantes5,habitantes6,habitantes7,habitantes8,habitantes9,habitantes10};
+        for (int k =0; k<10; k++)
+        {
+            habitantes[k] = Long.parseLong(hab[k].getText());
+        }
+        String numero = numeroNT.getText();
+        String region = regionNT.getText();
+        if (String.valueOf(formaCB.getSelectedItem()).equals("Cúbico"))
+        {
+            db.ingresarTanque("Cubico", numero, municipios, habitantes, region, 0.0, 0.0, 0.0, 0.0, 0.0, Double.parseDouble(ladoCubico.getText()));
+        }
+        if (String.valueOf(formaCB.getSelectedItem()).equals("Ortogonal"))
+        {
+            db.ingresarTanque("Ortogonal", numero, municipios, habitantes, region, 0.0, 0.0, Double.parseDouble(anchoOrt.getText()), Double.parseDouble(altoOrt.getText()), Double.parseDouble(largoOrt.getText()), 0.0);
+        }
+        if (String.valueOf(formaCB.getSelectedItem()).equals("Cilíndrico"))
+        {
+            db.ingresarTanque("Cilindrico", numero, municipios, habitantes, region, Double.parseDouble(radiotxt.getText()), Double.parseDouble(altocilin.getText()), 0.0, 0.0, 0.0, 0.0);
+        }
     }//GEN-LAST:event_agregarTanqueActionPerformed
 
     /**

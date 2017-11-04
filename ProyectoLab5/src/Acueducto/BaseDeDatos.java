@@ -28,13 +28,14 @@ public class BaseDeDatos {
     }
     public void ingresarTanque(String tipo, String numero, String[] municipios, long[] habitantes, String region,double radio, double altura, double ancho, double alto, double largo, double lado)
     {
-        if (tipo.equals("Cilíndrico"))
+        if (tipo.equals("Cilindrico"))
         {
-            acueducto.nuevoCilindrico(numero, municipios, habitantes, region, radio, altura);
+            //acueducto.nuevoCilindrico(numero, municipios, habitantes, region, radio, altura);
             Tanque cilin = new Cilindrico(numero, municipios, habitantes, region, radio, altura);
+            
             ds.save(cilin);
         }
-        if (tipo.equals("Cúbico"))
+        if (tipo.equals("Cubico"))
         {
             acueducto.nuevoCubico(numero, municipios, habitantes, region, lado);
             Tanque tanque = new Cubico(numero, municipios, habitantes, region, lado);
@@ -50,12 +51,12 @@ public class BaseDeDatos {
     public String buscarTanques()
     {
         String tanques ="";
-        Query<Tanque> query = ds.createQuery(Tanque.class); // todos los hoteles
+        Query<Tanque> query = ds.createQuery(Tanque.class);
         
-        List<Tanque> contenedores = query.asList();
-        System.out.println("Todos los Hoteles");
-        for (Tanque tanque: contenedores){
-            tanques += tanque;
+        List<Tanque> bus = query.asList();
+        for (Tanque tanque: bus)
+        {
+            tanques += ("\n"+ tanque.getID() + "\n"+tanque.getRegion());
         }
         return tanques;
     }
