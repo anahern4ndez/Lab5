@@ -13,7 +13,8 @@ import org.mongodb.morphia.annotations.Id;
 
 @Entity
 public class Ortogonal extends Tanque 
-{@Id private ObjectId id;
+{
+    //@Id private ObjectId id;
     private double largo;
     private double ancho;
     private double alto;

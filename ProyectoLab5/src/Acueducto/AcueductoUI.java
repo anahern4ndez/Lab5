@@ -15,6 +15,7 @@ import org.mongodb.morphia.query.Query;
 import com.mongodb.MongoClient;
 import java.util.List;
 import javax.swing.JOptionPane;
+import javax.swing.JTextField;
 
 public class AcueductoUI extends javax.swing.JFrame {
 
@@ -735,6 +736,9 @@ public class AcueductoUI extends javax.swing.JFrame {
             System.out.println("An integer");
         
         
+        String[] habitantes = null;
+        
+        JTextField[] texto = new JTextField[10];
         
         if (String.valueOf(formaCB.getSelectedItem()).equals("Cúbico"))
         {
@@ -797,7 +801,7 @@ public class AcueductoUI extends javax.swing.JFrame {
     }//GEN-LAST:event_seguirNTanqueActionPerformed
 
     private void mostrarValvulasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarValvulasActionPerformed
-        cantidadValvulas.setText(String.valueOf(acueducto.valvulasAbiertasC()));
+        cantidadValvulas.setText(String.valueOf(db.valvulasC()));
     }//GEN-LAST:event_mostrarValvulasActionPerformed
 
     private void mostrarTanquesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarTanquesActionPerformed

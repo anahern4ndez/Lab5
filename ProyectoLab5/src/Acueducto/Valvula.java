@@ -8,9 +8,12 @@
 package Acueducto;
 
 import java.util.ArrayList;
+import org.bson.types.ObjectId;
+import org.mongodb.morphia.annotations.Id;
 
 public class Valvula 
 {
+    @Id private ObjectId id;
     private ArrayList<String> fechasAbiertos;
     private ArrayList<String> fechasCerrados;
     private String municipio;

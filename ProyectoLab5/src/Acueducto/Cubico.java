@@ -14,7 +14,7 @@ import org.mongodb.morphia.annotations.Id;
 @Entity
 public class Cubico extends Tanque 
 {
-    @Id private ObjectId id;
+    //@Id private ObjectId id;
     private double lado;
     
     public Cubico(String numero, String[] municipios, long[] habitantes, String region, double lado) 

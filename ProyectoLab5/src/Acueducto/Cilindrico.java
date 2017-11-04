@@ -14,7 +14,7 @@ import org.mongodb.morphia.annotations.Id;
 @Entity
 public class Cilindrico  extends Tanque 
 {
-    @Id private ObjectId id;
+   // @Id private ObjectId id;
     private double radio;
     private double altura;
  

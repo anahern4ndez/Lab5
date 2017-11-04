@@ -8,8 +8,11 @@
 package Acueducto;
 
 import java.util.ArrayList;
+import org.bson.types.ObjectId;
+import org.mongodb.morphia.annotations.Id;
 public class Acueducto 
 {
+    @Id private ObjectId id;
     private ArrayList<Tanque> contenedores;
     public Acueducto()
     {
