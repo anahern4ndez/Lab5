@@ -17,6 +17,7 @@ public class Cubico extends Tanque
     //@Id private ObjectId id;
     private double lado;
     
+    public Cubico(){}
     public Cubico(String numero, String[] municipios, long[] habitantes, String region, double lado) 
     {
        super(numero, municipios, habitantes, region);

@@ -22,6 +22,7 @@ public class Valvula
     private long cantHab;
     private boolean estado; 
     
+    public Valvula(){}
     public Valvula(String municipio, long habitantes)
     {
         fechasAbiertos = new ArrayList<>();

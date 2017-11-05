@@ -22,6 +22,8 @@ public class Tanque {
     protected String region; // region a la cual el tanque esta proveendo agua
     @Embedded
     protected Valvula[] valvulas;
+    
+    public Tanque(){}
     public Tanque(String numero, String[] municipios, long[] habitantes, String region)
     {
         this.numero = numero;

@@ -77,14 +77,16 @@ public class BaseDeDatos {
         }
         return tanques;
     }
+    public void updateTanques()
+    {
+        
+    }
     public long valvulasC()
     {
         long valv = 0;
-        Query<Tanque> query = ds.createQuery(Tanque.class).retrievedFields(true,"cilindricoField");
-        List<Tanque> valvulasAbiertas = query.asList();
- 
-     
-        for (Tanque cilindrico : valvulasAbiertas) 
+        Query<Cilindrico> query = ds.createQuery(Cilindrico.class);
+        List<Cilindrico> valvulasAbiertas = query.asList();
+        for (Cilindrico cilindrico : valvulasAbiertas) 
         {
             for(int i =0; i<10; i++)
             {
@@ -93,7 +95,6 @@ public class BaseDeDatos {
                     valv +=1;
                 }
             }
-
         } 
         return valv;
     }

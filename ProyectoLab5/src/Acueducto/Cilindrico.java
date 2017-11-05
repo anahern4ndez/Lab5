@@ -25,7 +25,8 @@ public class Cilindrico  extends Tanque
        this.radio = radio; 
        this.altura= altura; 
    }
-    
+   public Cilindrico(){}
+   
    public double getRadio () 
    { 
        return radio;   

@@ -19,6 +19,7 @@ public class Ortogonal extends Tanque
     private double ancho;
     private double alto;
     
+    public Ortogonal(){}
     public Ortogonal(String numero, String[] municipios, long[] habitantes, String region, double largo, double ancho, double alto) 
     {
         super(numero, municipios, habitantes, region);
