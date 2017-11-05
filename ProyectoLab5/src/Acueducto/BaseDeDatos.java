@@ -53,7 +53,6 @@ public class BaseDeDatos {
         String tanques ="";
         Query<Tanque> query = ds.createQuery(Tanque.class);
         List<Tanque> busqueda = query.asList();
-        //"\n"+ tanque.getID() + "\n"+
         for (Tanque tanque: busqueda)
         {
             tanques += (tanque.getRegion());
