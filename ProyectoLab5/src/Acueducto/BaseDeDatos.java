@@ -8,6 +8,7 @@
 package Acueducto;
 
 import com.mongodb.MongoClient;
+import java.util.ArrayList;
 import java.util.List;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
@@ -50,12 +51,29 @@ public class BaseDeDatos {
     }
     public String buscarTanques()
     {
+        ArrayList<Tanque> todosTanques = new ArrayList<>();
         String tanques ="";
-        Query<Tanque> query = ds.createQuery(Tanque.class);
-        List<Tanque> busqueda = query.asList();
-        for (Tanque tanque: busqueda)
+        Query<Ortogonal> query = ds.createQuery(Ortogonal.class);
+        List<Ortogonal> busqueda = query.asList();
+        for(Ortogonal orto: busqueda)
         {
-            tanques += (tanque.getRegion());
+            todosTanques.add(orto);
+        }
+        Query<Cilindrico> query2 = ds.createQuery(Cilindrico.class);
+        List<Cilindrico> busqueda2 = query2.asList();
+        for(Cilindrico orto: busqueda2)
+        {
+            todosTanques.add(orto);
+        }
+        Query<Cubico> query3 = ds.createQuery(Cubico.class);
+        List<Cubico> busqueda3 = query3.asList();
+        for(Cubico orto: busqueda3)
+        {
+            todosTanques.add(orto);
+        }
+        for (Tanque tanque: todosTanques)
+        {
+            tanques += ("\n"+ tanque.getID() + "\n"+ tanque.getRegion());
         }
         return tanques;
     }
