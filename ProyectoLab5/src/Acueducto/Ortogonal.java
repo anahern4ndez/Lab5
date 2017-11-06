@@ -26,6 +26,7 @@ public class Ortogonal extends Tanque
         this.largo = largo; 
         this.ancho= ancho;
         this.alto= alto;
+        capacidad = calcularVolumen();
     }
     public double getLargo () 
     { 
@@ -39,9 +40,14 @@ public class Ortogonal extends Tanque
     { 
         return alto;   
     }
-    public double calcularVolumen(double alto, double ancho, double largo)
+    public double calcularVolumen()
     {
         double resultado = alto*largo*ancho;
         return resultado;
+    }
+    public String toString()
+    {
+        String hilo = "\n TIPO DE TANQUE: ORTOGONAL " +super.toString() ;
+        return hilo;
     }
 }

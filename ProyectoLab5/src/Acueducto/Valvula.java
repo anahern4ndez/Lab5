@@ -11,18 +11,22 @@ import java.util.ArrayList;
 import org.bson.types.ObjectId;
 import org.mongodb.morphia.annotations.Embedded;
 import org.mongodb.morphia.annotations.Id;
+import org.mongodb.morphia.annotations.NotSaved;
 
-@Embedded
 public class Valvula 
 {
-    //@Id private ObjectId id;
+    @Id private ObjectId id;
     private ArrayList<String> fechasAbiertos;
     private ArrayList<String> fechasCerrados;
-    private String municipio;
     private long cantHab;
     private boolean estado; 
+    private String municipio;
     
-    public Valvula(){}
+    public Valvula()
+    {
+        fechasAbiertos = new ArrayList<>();
+        fechasCerrados = new ArrayList<>();
+    }
     public Valvula(String municipio, long habitantes)
     {
         fechasAbiertos = new ArrayList<>();
@@ -54,6 +58,17 @@ public class Valvula
     public void fechaCerrado(String fecha)
     {
         fechasCerrados.add(fecha);
+    }
+    public String toString()
+    {
+        String hilo = "";
+        String est ="";
+        if (estado == true) { est = "Abierta";}
+        if (estado == false) { est = "Cerrada";}
+        hilo += "\n\t Estado de la válvula: "+ est;
+        hilo += "\n\t Municipio al que alimenta: "+ municipio;
+        return hilo;
+        
     }
    
 }

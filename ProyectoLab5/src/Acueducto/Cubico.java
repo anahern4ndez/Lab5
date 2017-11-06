@@ -22,6 +22,7 @@ public class Cubico extends Tanque
     {
        super(numero, municipios, habitantes, region);
        this.lado = lado;
+       capacidad = calcularVolumen();
     }
     
     public double getLado() 
@@ -29,9 +30,15 @@ public class Cubico extends Tanque
        return lado;   
     }
      
-    public double calcularVolumen(double lado)
+    public double calcularVolumen()
     {
        double resultado = (lado*lado*lado);
        return resultado;
+    }
+    @Override
+    public String toString()
+    {
+        String hilo = " \n TIPO DE TANQUE: CUBICO  " + super.toString();
+        return hilo;
     }
 }

@@ -20,7 +20,6 @@ public class Tanque {
     protected double porcentajeAguaDisponible;
     protected double cantAguaDisponible;
     protected String region; // region a la cual el tanque esta proveendo agua
-    @Embedded
     protected Valvula[] valvulas;
     
     public Tanque(){}
@@ -35,7 +34,7 @@ public class Tanque {
         }
         calcularPorcentaje();
     }
-    private void calcularPorcentaje()
+    public void calcularPorcentaje()
     {
         double habitantes = 0;
         for(int i=0; i<10; i++)
@@ -51,12 +50,15 @@ public class Tanque {
         else 
         {
             porcentajeAguaDisponible =0.0;
+            cantAguaDisponible =0.0;
         }
        
     }
-    public void llenarTanque()
+    public double llenarTanque()
     {
         porcentajeAguaDisponible = 100.0;
+        cantAguaDisponible = capacidad;
+        return cantAguaDisponible;
     }
     public String getID()
     {
@@ -84,6 +86,14 @@ public class Tanque {
     }
     public String toString()
     {
-        return "\n TANQUE NÚMERO "+ numero + "\n CANTIDAD DE AGUA RESTANTE DENTRO DEL DEL TANQUE: "+ cantAguaDisponible;
+        String hilo = "\n TANQUE NÚMERO "+ numero + "\n CANTIDAD DE AGUA RESTANTE DENTRO DEL DEL TANQUE: "+ cantAguaDisponible;
+        hilo += "\n PORCENTAJE DE AGUA RESTANTE: "+ porcentajeAguaDisponible;
+        hilo += "\n TIPO DE TANQUE: CUBICO";
+        hilo += "\n VÁLVULAS QUE DISPONE: ";
+        for (Valvula valv : valvulas)
+        {
+            hilo += ("\n\t" +valv);
+        }
+        return hilo;
     }
 }

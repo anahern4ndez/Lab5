@@ -24,6 +24,7 @@ public class Cilindrico  extends Tanque
        super(numero, municipios, habitantes, region);
        this.radio = radio; 
        this.altura= altura; 
+       capacidad = calcularVolumen();
    }
    public Cilindrico(){}
    
@@ -36,9 +37,14 @@ public class Cilindrico  extends Tanque
        return altura;   
    }
     
-   public double calcularVolumen(double altura, double radio)
+   public double calcularVolumen()
    {
       double resultado = altura*Math.PI*Math.pow(radio,2);
       return resultado;
    }
+   public String toString()
+    {
+        String hilo = "\n TIPO DE TANQUE: CILINDRICO "+ super.toString();
+        return hilo;
+    }
 }

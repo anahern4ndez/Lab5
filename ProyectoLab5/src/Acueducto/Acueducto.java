@@ -33,7 +33,7 @@ public class Acueducto
     {
         Tanque nuevo = new Ortogonal(ID, municipios, habitantes, region, largo, ancho, alto);
         contenedores.add(nuevo);   
-    }/**
+    }
     public String obtenerTanques()
     {
         String cilindricos = "TANQUES CILINDRICOS: ";
@@ -58,7 +58,7 @@ public class Acueducto
             }
         }
         return cilindricos + cubo + ort;
-    }**/
+    }
     public long valvulasAbiertasC()
     {
         long numero =0;
@@ -77,8 +77,9 @@ public class Acueducto
         }
         return numero;
     }
-    public void abrirValvula(String IDtanque, String municipio, String fecha)
+    public Valvula[] abrirValvula(String IDtanque, String municipio, String fecha, ArrayList<Tanque> contenedores)
     {
+        Valvula[] valvulas = null;
         for (Tanque tanque: contenedores)
         {
             if (tanque.getID().equals(IDtanque))
@@ -91,11 +92,14 @@ public class Acueducto
                         tanque.getValvulas()[i].fechaAbierto(fecha);
                     }
                 }
+                valvulas = tanque.getValvulas();
             }
         }
+        return valvulas;
     }
-    public void cerrarValvula(String IDtanque, String municipio, String fecha)
+    public Valvula[] cerrarValvula(String IDtanque, String municipio, String fecha, ArrayList<Tanque> contenedores)
     {
+        Valvula[] valvulas = null;
         for (Tanque tanque: contenedores)
         {
             if (tanque.getID().equals(IDtanque))
@@ -104,12 +108,14 @@ public class Acueducto
                 {
                     if (tanque.getValvulas()[i].getMunicipio().equals(municipio))   
                     {
-                        tanque.getValvulas()[i].setEstado(true);
+                        tanque.getValvulas()[i].setEstado(false);
                         tanque.getValvulas()[i].fechaCerrado(fecha);
                     }
                 }
             }
+            valvulas = tanque.getValvulas();
         }
+        return valvulas;
     }
     public double getAguaRegion(String region)
     {
@@ -123,14 +129,17 @@ public class Acueducto
         }
         return agua;
     }
-    public void llenarTanque(String ID)
+    public double llenarTanque(String ID, ArrayList<Tanque> contenedores)
     {
+        double capacidadTanque = 0;
         for (Tanque tanque: contenedores)
         {
             if (tanque.getID().equals(ID))
             {
-                tanque.llenarTanque();
+                capacidadTanque = tanque.llenarTanque();
             }
         }
+        return capacidadTanque;
     }
+    
 }

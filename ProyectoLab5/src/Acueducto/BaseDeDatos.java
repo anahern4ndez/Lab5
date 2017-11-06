@@ -14,6 +14,7 @@ import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
 import org.mongodb.morphia.query.Query;
 import org.mongodb.morphia.query.QueryResults;
+import org.mongodb.morphia.query.UpdateOperations;
 
 public class BaseDeDatos {
     private Acueducto acueducto;
@@ -31,9 +32,8 @@ public class BaseDeDatos {
     {
         if (tipo.equals("Cilindrico"))
         {
-            //acueducto.nuevoCilindrico(numero, municipios, habitantes, region, radio, altura);
+            acueducto.nuevoCilindrico(numero, municipios, habitantes, region, radio, altura);
             Tanque cilin = new Cilindrico(numero, municipios, habitantes, region, radio, altura);
-            
             ds.save(cilin);
         }
         if (tipo.equals("Cubico"))
@@ -73,13 +73,52 @@ public class BaseDeDatos {
         }
         for (Tanque tanque: todosTanques)
         {
-            tanques += ("\n"+ tanque.getID() + "\n"+ tanque.getRegion());
+            tanques += ("\n"+ tanque);
         }
         return tanques;
     }
-    public void updateTanques()
+    public void updateLlenado(String tanqueID)
     {
-        
+        ArrayList<Tanque> todosTanques = new ArrayList<>();
+        Query<Ortogonal> query = ds.createQuery(Ortogonal.class).field("numero").equal(tanqueID);
+        List<Ortogonal> busqueda = query.asList();
+        for(Ortogonal orto: busqueda)
+        {
+            todosTanques.add(orto);
+        }
+        Query<Cilindrico> query2 = ds.createQuery(Cilindrico.class).field("numero").equal(tanqueID);
+        List<Cilindrico> busqueda2 = query2.asList();
+        for(Cilindrico orto: busqueda2)
+        {
+            todosTanques.add(orto);
+        }
+        Query<Cubico> query3 = ds.createQuery(Cubico.class).field("numero").equal(tanqueID);
+        List<Cubico> busqueda3 = query3.asList();
+        for(Cubico orto: busqueda3)
+        {
+            todosTanques.add(orto);
+        }
+        for(Tanque tanque : todosTanques)
+        {
+            if (tanque.getID().equals(tanqueID))
+            {
+                if (tanque instanceof Ortogonal)
+                {
+                    UpdateOperations upd = ds.createUpdateOperations(Ortogonal.class).set("cantAguaDisponible", acueducto.llenarTanque(tanqueID, todosTanques)).set("porcentajeAguaDisponible",100);
+                    ds.update(query, upd,false);        
+                }
+                if (tanque instanceof Cilindrico)
+                {
+                    UpdateOperations upd = ds.createUpdateOperations(Cilindrico.class).set("cantAguaDisponible", acueducto.llenarTanque(tanqueID, todosTanques)).set("porcentajeAguaDisponible",100);
+                    ds.update(query2, upd,false);
+                }
+                if (tanque instanceof Cubico)
+                {
+                    UpdateOperations upd = ds.createUpdateOperations(Cubico.class).set("cantAguaDisponible", acueducto.llenarTanque(tanqueID, todosTanques)).set("porcentajeAguaDisponible",100);
+                    ds.update(query3, upd,false);
+                }
+            }
+        }
     }
     public long valvulasC()
     {
@@ -98,7 +137,118 @@ public class BaseDeDatos {
         } 
         return valv;
     }
-    
-    
-    
+    public void abrirValvula(String IDtanque, String municipio, String fecha)
+    {
+        ArrayList<Tanque> contenedores = new ArrayList<>();
+        Query<Ortogonal> query = ds.createQuery(Ortogonal.class).field("numero").equal(IDtanque);
+        List<Ortogonal> busqueda = query.asList();
+        for(Ortogonal orto: busqueda)
+        {
+            contenedores.add(orto);
+        }
+        Query<Cilindrico> query2 = ds.createQuery(Cilindrico.class).field("numero").equal(IDtanque);
+        List<Cilindrico> busqueda2 = query2.asList();
+        for(Cilindrico orto: busqueda2)
+        {
+            contenedores.add(orto);
+        }
+        Query<Cubico> query3 = ds.createQuery(Cubico.class).field("numero").equal(IDtanque);
+        List<Cubico> busqueda3 = query3.asList();
+        for(Cubico orto: busqueda3)
+        {
+            contenedores.add(orto);
+        }
+        for (Tanque tanque: contenedores)
+        {
+            if (tanque.getID().equals(IDtanque))
+            {
+                if (tanque instanceof Ortogonal)
+                {
+                    UpdateOperations upd = ds.createUpdateOperations(Ortogonal.class).set("valvulas", acueducto.abrirValvula(IDtanque, municipio, fecha, contenedores));
+                    ds.update(query, upd,false);
+                }
+                if (tanque instanceof Cilindrico)
+                {
+                    UpdateOperations upd = ds.createUpdateOperations(Cilindrico.class).set("valvulas", acueducto.abrirValvula(IDtanque, municipio, fecha, contenedores));
+                    ds.update(query2, upd,false);
+                }
+                if (tanque instanceof Cubico)
+                {
+                    UpdateOperations upd = ds.createUpdateOperations(Cubico.class).set("valvulas", acueducto.abrirValvula(IDtanque, municipio, fecha, contenedores));
+                    ds.update(query3, upd,false);
+                }
+            }
+        }
+    }
+    public void cerrarValvula(String IDtanque, String municipio, String fecha)
+    {
+        ArrayList<Tanque> contenedores = new ArrayList<>();
+        Query<Ortogonal> query = ds.createQuery(Ortogonal.class).field("numero").equal(IDtanque);
+        List<Ortogonal> busqueda = query.asList();
+        for(Ortogonal orto: busqueda)
+        {
+            contenedores.add(orto);
+        }
+        Query<Cilindrico> query2 = ds.createQuery(Cilindrico.class).field("numero").equal(IDtanque);
+        List<Cilindrico> busqueda2 = query2.asList();
+        for(Cilindrico orto: busqueda2)
+        {
+            contenedores.add(orto);
+        }
+        Query<Cubico> query3 = ds.createQuery(Cubico.class).field("numero").equal(IDtanque);
+        List<Cubico> busqueda3 = query3.asList();
+        for(Cubico orto: busqueda3)
+        {
+            contenedores.add(orto);
+        }
+        for (Tanque tanque: contenedores)
+        {
+            if (tanque.getID().equals(IDtanque))
+            {
+                if (tanque instanceof Ortogonal)
+                {
+                    UpdateOperations upd = ds.createUpdateOperations(Ortogonal.class).set("valvulas", acueducto.cerrarValvula(IDtanque, municipio, fecha, contenedores));
+                    ds.update(query, upd,false);
+                }
+                if (tanque instanceof Cilindrico)
+                {
+                    UpdateOperations upd = ds.createUpdateOperations(Cilindrico.class).set("valvulas", acueducto.cerrarValvula(IDtanque, municipio, fecha, contenedores));
+                    ds.update(query2, upd,false);
+                }
+                if (tanque instanceof Cubico)
+                {
+                    UpdateOperations upd = ds.createUpdateOperations(Cubico.class).set("valvulas", acueducto.cerrarValvula(IDtanque, municipio, fecha, contenedores));
+                    ds.update(query3, upd,false);
+                }
+            }
+        }
+    }
+    public double aguaDisponible(String region)
+    {
+        double agua =0;
+        ArrayList<Tanque> contenedores = new ArrayList<>();
+        Query<Ortogonal> query = ds.createQuery(Ortogonal.class).field("region").equal(region);
+        List<Ortogonal> busqueda = query.asList();
+        for(Ortogonal orto: busqueda)
+        {
+            contenedores.add(orto);
+        }
+        Query<Cilindrico> query2 = ds.createQuery(Cilindrico.class).field("region").equal(region);
+        List<Cilindrico> busqueda2 = query2.asList();
+        for(Cilindrico orto: busqueda2)
+        {
+            contenedores.add(orto);
+        }
+        Query<Cubico> query3 = ds.createQuery(Cubico.class).field("region").equal(region);
+        List<Cubico> busqueda3 = query3.asList();
+        for(Cubico orto: busqueda3)
+        {
+            contenedores.add(orto);
+        }
+        for (Tanque tanque: contenedores)
+        {
+            agua = tanque.getAguaRestante();
+        }
+        return agua;
+    }
 }
