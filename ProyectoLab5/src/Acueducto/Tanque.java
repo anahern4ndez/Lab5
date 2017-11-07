@@ -32,7 +32,6 @@ public class Tanque {
         {
             valvulas[i]= new Valvula(municipios[i], habitantes[i]);
         }
-        calcularPorcentaje();
     }
     public void calcularPorcentaje()
     {
@@ -40,8 +39,7 @@ public class Tanque {
         for(int i=0; i<10; i++)
         {
             habitantes += valvulas[i].getcant_Habitantes();
-        }
-        habitantes *= 2;// ya que se determinó que cada habitante consumiría 2m^3 de agua. 
+        } 
         cantAguaDisponible = capacidad - habitantes;
         if (cantAguaDisponible > 0.0)
         {
@@ -88,7 +86,6 @@ public class Tanque {
     {
         String hilo = "\n TANQUE NÚMERO "+ numero + "\n CANTIDAD DE AGUA RESTANTE DENTRO DEL DEL TANQUE: "+ cantAguaDisponible;
         hilo += "\n PORCENTAJE DE AGUA RESTANTE: "+ porcentajeAguaDisponible;
-        hilo += "\n TIPO DE TANQUE: CUBICO";
         hilo += "\n VÁLVULAS QUE DISPONE: ";
         for (Valvula valv : valvulas)
         {

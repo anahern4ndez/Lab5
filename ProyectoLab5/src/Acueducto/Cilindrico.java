@@ -25,6 +25,7 @@ public class Cilindrico  extends Tanque
        this.radio = radio; 
        this.altura= altura; 
        capacidad = calcularVolumen();
+       super.calcularPorcentaje();
    }
    public Cilindrico(){}
    

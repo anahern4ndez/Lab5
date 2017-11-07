@@ -23,6 +23,7 @@ public class Cubico extends Tanque
        super(numero, municipios, habitantes, region);
        this.lado = lado;
        capacidad = calcularVolumen();
+       super.calcularPorcentaje();
     }
     
     public double getLado() 

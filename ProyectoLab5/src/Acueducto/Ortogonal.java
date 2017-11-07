@@ -27,6 +27,7 @@ public class Ortogonal extends Tanque
         this.ancho= ancho;
         this.alto= alto;
         capacidad = calcularVolumen();
+        super.calcularPorcentaje();
     }
     public double getLargo () 
     { 
