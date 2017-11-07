@@ -21,12 +21,13 @@ public class Valvula
     private long cantHab;
     private boolean estado; 
     private String municipio;
-    
+    //CONSTRUCTOR PARA MONGO
     public Valvula()
     {
         fechasAbiertos = new ArrayList<>();
         fechasCerrados = new ArrayList<>();
     }
+    //CONSTRUCTOR PARA JAVA
     public Valvula(String municipio, long habitantes)
     {
         fechasAbiertos = new ArrayList<>();
@@ -35,30 +36,58 @@ public class Valvula
         this.cantHab = habitantes;
         estado = false;
     }
+    /**
+     * 
+     * @return String municipio al que la valvula da agua
+     */
     public String getMunicipio () 
     { 
         return municipio;  
     }
+    /**
+     * 
+     * @return long cantidad de habitantes del municipio
+     */
     public long getcant_Habitantes () 
     { 
         return cantHab;
     }
+    /**
+     * 
+     * @param abierto: boolean de falso si se quiere cerrar la valvula o verdadero si se quiere abrir.
+     */
     public void setEstado(boolean abierto)
     {
         this.estado = abierto;
     }
+    /**
+     * 
+     * @return boolean de si está abierta la válvula o no
+     */
     public boolean getEstado () 
     { 
         return estado;  
     } 
+    /**
+     * 
+     * @param fecha: fecha en la cual se abrió la valvula
+     */
     public void fechaAbierto(String fecha)
     {
         fechasAbiertos.add(fecha);
     }
+    /**
+     * 
+     * @param fecha: fecha en la cual se cerró la válvula
+     */
     public void fechaCerrado(String fecha)
     {
         fechasCerrados.add(fecha);
     }
+    /**
+     * 
+     * @return String informacion querida de la valvula
+     */
     public String toString()
     {
         String hilo = "";

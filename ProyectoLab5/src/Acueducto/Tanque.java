@@ -21,8 +21,9 @@ public class Tanque {
     protected double cantAguaDisponible;
     protected String region; // region a la cual el tanque esta proveendo agua
     protected Valvula[] valvulas;
-    
+    //CONSTRUCTOR PARA MONGO
     public Tanque(){}
+    //CONSTRUCTOR PARA JAVA
     public Tanque(String numero, String[] municipios, long[] habitantes, String region)
     {
         this.numero = numero;
@@ -33,6 +34,10 @@ public class Tanque {
             valvulas[i]= new Valvula(municipios[i], habitantes[i]);
         }
     }
+    /**
+     * 
+     * Método para calcular el porcentaje de agua restante de un tanque
+     */
     public void calcularPorcentaje()
     {
         double habitantes = 0;
@@ -52,36 +57,92 @@ public class Tanque {
         }
        
     }
+    /**
+     * Método para llenar el tanque. 
+     * @return double de cantidad de agua disponible en el tanque una vez se ha llenado.
+     */
     public double llenarTanque()
     {
         porcentajeAguaDisponible = 100.0;
         cantAguaDisponible = capacidad;
         return cantAguaDisponible;
     }
+    /**
+     * 
+     * @return String ID de tanque
+     */
     public String getID()
     {
         return numero;
     }
+    /**
+     * 
+     * @return String region a la que alimenta el tanque
+     */
     public String getRegion()
     {
         return region;
     }
+    /**
+     * 
+     * @return Valvula[] lista de valvulas del tanque
+     */
     public Valvula[] getValvulas()
     {
         return valvulas;
     }
+    /**
+     * 
+     * @return double porcentaje de agua restante en el tanque
+     */
     public double getPorcentaje()
     {
         return porcentajeAguaDisponible;
     }
+    /**
+     * 
+     * @return double capacidad del tanque
+     */
     public double getCapacidad()
     {
         return capacidad;
     }
+    /**
+     * 
+     * @return double agua restante
+     */
     public double getAguaRestante()
     {
         return cantAguaDisponible;
     }
+    /**
+     * 
+     * @param fecha: para guardar la fecha en la cual se cerraron todas las valvulas del tanque
+     */
+    public void cerrarTodasValvulas(String fecha)
+    {
+        for (int i =0; i<10; i++)
+        {
+            valvulas[i].setEstado(false);
+            valvulas[i].fechaCerrado(fecha);
+        }
+    }
+    /**
+     * 
+     * @param fecha: fecha en la cual se abren todas las valvulas (es decir cuando se llena el tanque)
+     */
+    public void abrirTodasValvulas(String fecha)
+    {
+        for (int i =0; i<10; i++)
+        {
+            valvulas[i].setEstado(true);
+            valvulas[i].fechaAbierto(fecha);
+        }
+    }
+    /**
+     * 
+     * @return String informacion relevante del tanque
+     */
     public String toString()
     {
         String hilo = "\n TANQUE NÚMERO "+ numero + "\n CANTIDAD DE AGUA RESTANTE DENTRO DEL DEL TANQUE: "+ cantAguaDisponible;
@@ -93,4 +154,5 @@ public class Tanque {
         }
         return hilo;
     }
+    
 }

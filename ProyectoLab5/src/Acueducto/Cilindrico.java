@@ -14,7 +14,6 @@ import org.mongodb.morphia.annotations.Id;
 @Entity
 public class Cilindrico  extends Tanque 
 {
-   // @Id private ObjectId id;
     private double radio;
     private double altura;
  
@@ -28,21 +27,20 @@ public class Cilindrico  extends Tanque
        super.calcularPorcentaje();
    }
    public Cilindrico(){}
-   
-   public double getRadio () 
-   { 
-       return radio;   
-   }
-   public double getAltura () 
-   { 
-       return altura;   
-   }
-    
+   /**
+     * 
+     * @return double el volumen o capacidad del tanque
+     */
    public double calcularVolumen()
    {
       double resultado = altura*Math.PI*Math.pow(radio,2);
       return resultado;
    }
+   /**
+     * 
+     * @return String informacion extra relevante de un tanque cilindrico
+     */
+   @Override
    public String toString()
     {
         String hilo = "\n TIPO DE TANQUE: CILINDRICO "+ super.toString();

@@ -28,6 +28,21 @@ public class BaseDeDatos {
         morphia.map(Acueducto.class).map(Valvula.class).map(Tanque.class).map(Cilindrico.class).map(Ortogonal.class).map(Cubico.class); // clases a guardar
         ds = morphia.createDatastore(mongo, "Acueducto");//Creacion de la base de datos
     }
+    /**
+     * Método para crear un nuevo tanque en la BD.
+     * @param tipo: tipo de tanque que se agregará a la base de datos
+     * @param numero: numero de identificación del tanque
+     * @param municipios: todos los municipios a lso que alimenta el tanque
+     * @param habitantes: todos los habitantes (o el número en promedio) de un municipio
+     * @param region: region a la que alimenta el tanque
+     * @param radio: en el caso sea un tanque cilindrico
+     * @param altura:en el caso sea un tanque cilindrico
+     * @param ancho:en el caso sea un tanque ortogonal
+     * @param alto:en el caso sea un tanque ortogonal
+     * @param largo: en el caso sea un tanque ortogonal
+     * @param lado: en el caso sea un tanque cubico
+     * 
+     */
     public void ingresarTanque(String tipo, String numero, String[] municipios, long[] habitantes, String region,double radio, double altura, double ancho, double alto, double largo, double lado)
     {
         if (tipo.equals("Cilindrico"))
@@ -49,6 +64,11 @@ public class BaseDeDatos {
             ds.save(tanque);
         }
     }
+    /**
+     * Método para mostrar todos los tanques actuales del acueducto
+     * @return String de la inormación que se quiere saber de los tanques buscados en la base de datos.
+     * 
+     */
     public String buscarTanques()
     {
         ArrayList<Tanque> todosTanques = new ArrayList<>();
@@ -77,6 +97,11 @@ public class BaseDeDatos {
         }
         return tanques;
     }
+    /**
+     * Método para cambiarle los valores de un tanque a su 100% cuando éste se llena
+     * @param tanqueID: ID del tanque al que se quiere llenar
+     * 
+     */
     public void updateLlenado(String tanqueID)
     {
         ArrayList<Tanque> todosTanques = new ArrayList<>();
@@ -120,6 +145,11 @@ public class BaseDeDatos {
             }
         }
     }
+    /**
+     * Método para mostrar la cantidad de válvulas de todos los tanques cilíndricos que están abiertas
+     * @return long cantidad de valvulas
+     * 
+     */
     public long valvulasC()
     {
         long valv = 0;
@@ -137,6 +167,13 @@ public class BaseDeDatos {
         } 
         return valv;
     }
+    /**
+     * Método para abrir una válvula de un tanque específico
+     * @param IDtanque: tanque que contiene la válvula en cuestión
+     * @param municipio: municipioal que alimenta la válvula
+     * @param fecha: fecha en la cual se está abriendo la valvula
+     * 
+     */
     public void abrirValvula(String IDtanque, String municipio, String fecha)
     {
         ArrayList<Tanque> contenedores = new ArrayList<>();
@@ -180,6 +217,13 @@ public class BaseDeDatos {
             }
         }
     }
+    /**
+     * Método para cerrar una válvula de un tanque específico
+     * @param IDtanque: tanque que contiene la válvula en cuestión
+     * @param municipio: municipioal que alimenta la válvula
+     * @param fecha: fecha en la cual se está cerrando la valvula
+     * 
+     */
     public void cerrarValvula(String IDtanque, String municipio, String fecha)
     {
         ArrayList<Tanque> contenedores = new ArrayList<>();
@@ -223,6 +267,12 @@ public class BaseDeDatos {
             }
         }
     }
+    /**
+     * Método para obtener el agua que dispone un tanque que alimenta una región
+     * @param region: region a la que alimenta el tanque
+     * @return double de cantidad de agua disponible
+     * 
+     */
     public double aguaDisponible(String region)
     {
         double agua =0;
@@ -250,5 +300,113 @@ public class BaseDeDatos {
             agua = tanque.getAguaRestante();
         }
         return agua;
+    }
+    /**
+     * Método para obtener el porcentaje de agua disponible que tiene un tanque específico
+     * @param IDtanque: identificacion del tanque
+     * @return double porcentaje del tanque
+     */
+    public double getPorcentajeTanque(String IDtanque)
+    {
+        double porcentaje = 0;
+        ArrayList<Tanque> contenedores = new ArrayList<>();
+        Query<Ortogonal> query = ds.createQuery(Ortogonal.class);
+        List<Ortogonal> busqueda = query.asList();
+        for(Ortogonal orto: busqueda)
+        {
+            contenedores.add(orto);
+        }
+        Query<Cilindrico> query2 = ds.createQuery(Cilindrico.class);
+        List<Cilindrico> busqueda2 = query2.asList();
+        for(Cilindrico orto: busqueda2)
+        {
+            contenedores.add(orto);
+        }
+        Query<Cubico> query3 = ds.createQuery(Cubico.class);
+        List<Cubico> busqueda3 = query3.asList();
+        for(Cubico orto: busqueda3)
+        {
+            contenedores.add(orto);
+        }
+        for (Tanque tanque: contenedores)
+        {
+            if (tanque.getID().equals(IDtanque))
+            {
+                porcentaje = tanque.getPorcentaje();
+            }
+        }
+        return porcentaje;
+    }
+    /**
+     * Método para cerrar todas las válvulas de un tanque cuyo porcentaje es menor a 10% de agua. 
+     * @param ID: identificacion del tanque
+     * @param fechacerrado: fecha en la que se está cerrando todas las valvulas
+     * 
+     */
+    public void cerrarTodasValvulas(String ID, String fechacerrado)
+    {
+        ArrayList<Tanque> contenedores = new ArrayList<>();
+        Query<Ortogonal> query = ds.createQuery(Ortogonal.class);
+        List<Ortogonal> busqueda = query.asList();
+        for(Ortogonal orto: busqueda)
+        {
+            contenedores.add(orto);
+        }
+        Query<Cilindrico> query2 = ds.createQuery(Cilindrico.class);
+        List<Cilindrico> busqueda2 = query2.asList();
+        for(Cilindrico orto: busqueda2)
+        {
+            contenedores.add(orto);
+        }
+        Query<Cubico> query3 = ds.createQuery(Cubico.class);
+        List<Cubico> busqueda3 = query3.asList();
+        for(Cubico orto: busqueda3)
+        {
+            contenedores.add(orto);
+        }
+        for (Tanque tanque: contenedores)
+        {
+            if (tanque.getID().equals(ID))
+            {
+                tanque.cerrarTodasValvulas(fechacerrado);
+            }
+        }
+        
+    }
+    /**
+     * Método para abrir todas las válvulas de un tanque que ya está lleno.
+     * @param ID: identificacion del tanque
+     * @param fecha: fecha en la que se están abriendo todas las valvulas
+     * 
+     */
+    public void abrirTodasValvulas(String ID, String fecha)
+    {
+        ArrayList<Tanque> contenedores = new ArrayList<>();
+        Query<Ortogonal> query = ds.createQuery(Ortogonal.class);
+        List<Ortogonal> busqueda = query.asList();
+        for(Ortogonal orto: busqueda)
+        {
+            contenedores.add(orto);
+        }
+        Query<Cilindrico> query2 = ds.createQuery(Cilindrico.class);
+        List<Cilindrico> busqueda2 = query2.asList();
+        for(Cilindrico orto: busqueda2)
+        {
+            contenedores.add(orto);
+        }
+        Query<Cubico> query3 = ds.createQuery(Cubico.class);
+        List<Cubico> busqueda3 = query3.asList();
+        for(Cubico orto: busqueda3)
+        {
+            contenedores.add(orto);
+        }
+        for (Tanque tanque: contenedores)
+        {
+            if (tanque.getID().equals(ID))
+            {
+                tanque.abrirTodasValvulas(fecha);
+            }
+        }
+        
     }
 }

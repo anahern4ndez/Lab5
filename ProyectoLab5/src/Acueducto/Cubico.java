@@ -25,17 +25,19 @@ public class Cubico extends Tanque
        capacidad = calcularVolumen();
        super.calcularPorcentaje();
     }
-    
-    public double getLado() 
-    { 
-       return lado;   
-    }
-     
+    /**
+     * 
+     * @return double del volumen del tanque
+     */
     public double calcularVolumen()
     {
        double resultado = (lado*lado*lado);
        return resultado;
     }
+    /**
+     * 
+     * @return String informacion extra relevante de un tanque
+     */
     @Override
     public String toString()
     {

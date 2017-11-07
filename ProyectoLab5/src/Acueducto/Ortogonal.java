@@ -29,23 +29,20 @@ public class Ortogonal extends Tanque
         capacidad = calcularVolumen();
         super.calcularPorcentaje();
     }
-    public double getLargo () 
-    { 
-        return largo;
-    }
-    public double getAncho () 
-    {
-        return ancho;   
-    }
-    public double getAlto () 
-    { 
-        return alto;   
-    }
+    /**
+     * 
+     * @return double volumen del tanque
+     */
     public double calcularVolumen()
     {
         double resultado = alto*largo*ancho;
         return resultado;
     }
+    /**
+     * 
+     * @return String informacion extra relevante de un tanque ortogonal
+     */
+    @Override
     public String toString()
     {
         String hilo = "\n TIPO DE TANQUE: ORTOGONAL " +super.toString() ;
