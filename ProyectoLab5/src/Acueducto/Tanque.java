@@ -43,7 +43,10 @@ public class Tanque {
         double habitantes = 0;
         for(int i=0; i<10; i++)
         {
-            habitantes += valvulas[i].getcant_Habitantes();
+            if (valvulas[i].getEstado() == true)
+            {
+                habitantes += (3*valvulas[i].getcant_Habitantes());
+            }
         } 
         cantAguaDisponible = capacidad - habitantes;
         if (cantAguaDisponible > 0.0)

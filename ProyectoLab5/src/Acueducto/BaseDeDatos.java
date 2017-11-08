@@ -203,15 +203,24 @@ public class BaseDeDatos {
                 {
                     UpdateOperations upd = ds.createUpdateOperations(Ortogonal.class).set("valvulas", acueducto.abrirValvula(IDtanque, municipio, fecha, contenedores));
                     ds.update(query, upd,false);
+                    tanque.calcularPorcentaje();
+                    upd = ds.createUpdateOperations(Ortogonal.class).set("porcentajeAguaDisponible", tanque.getPorcentaje());
+                    ds.update(query, upd,false);
                 }
                 if (tanque instanceof Cilindrico)
                 {
                     UpdateOperations upd = ds.createUpdateOperations(Cilindrico.class).set("valvulas", acueducto.abrirValvula(IDtanque, municipio, fecha, contenedores));
                     ds.update(query2, upd,false);
+                    tanque.calcularPorcentaje();
+                    upd = ds.createUpdateOperations(Cilindrico.class).set("porcentajeAguaDisponible", tanque.getPorcentaje());
+                    ds.update(query2, upd,false);
                 }
                 if (tanque instanceof Cubico)
                 {
                     UpdateOperations upd = ds.createUpdateOperations(Cubico.class).set("valvulas", acueducto.abrirValvula(IDtanque, municipio, fecha, contenedores));
+                    ds.update(query3, upd,false);
+                    tanque.calcularPorcentaje();
+                    upd = ds.createUpdateOperations(Cubico.class).set("porcentajeAguaDisponible", tanque.getPorcentaje());
                     ds.update(query3, upd,false);
                 }
             }
