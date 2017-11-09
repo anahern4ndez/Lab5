@@ -45,7 +45,7 @@ public class Tanque {
         {
             if (valvulas[i].getEstado() == true)
             {
-                habitantes += (3*valvulas[i].getcant_Habitantes());
+                habitantes += (10*valvulas[i].getcant_Habitantes());
             }
         } 
         cantAguaDisponible = capacidad - habitantes;
@@ -149,6 +149,7 @@ public class Tanque {
     public String toString()
     {
         String hilo = "\n TANQUE NÚMERO "+ numero + "\n CANTIDAD DE AGUA RESTANTE DENTRO DEL DEL TANQUE: "+ cantAguaDisponible;
+        hilo += "\n REGION AL QUE ALIMENTA: "+ region;
         hilo += "\n PORCENTAJE DE AGUA RESTANTE: "+ porcentajeAguaDisponible;
         hilo += "\n VÁLVULAS QUE DISPONE: ";
         for (Valvula valv : valvulas)

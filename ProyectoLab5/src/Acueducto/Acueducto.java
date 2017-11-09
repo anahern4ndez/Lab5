@@ -65,59 +65,6 @@ public class Acueducto
         contenedores.add(nuevo);   
     }
     /**
-     * Método obtener la informacion de todos los tanques del acueducto
-     * @return String de la información deseada de un conjunto de tanques. 
-     * 
-     */
-    public String obtenerTanques()
-    {
-        String cilindricos = "TANQUES CILINDRICOS: ";
-        String cubo = "\n TANQUES CUBICOS: ";
-        String ort = "\n TANQUES ORTOGONALES: ";
-        for (Tanque tanque: contenedores)
-        {
-            if (tanque instanceof Cilindrico)
-            {
-                cilindricos += "\n\tTanque número ";
-                cilindricos += ((Cilindrico)tanque).getID();
-            }
-            if (tanque instanceof Cubico)
-            {
-                cubo += "\n\tTanque número ";
-                cubo += ((Cubico)tanque).getID();
-            }
-            if (tanque instanceof Ortogonal)
-            {
-                ort += "\n\tTanque número ";
-                ort += ((Ortogonal)tanque).getID();
-            }
-        }
-        return cilindricos + cubo + ort;
-    }
-    /**
-     * Método para obtener cantidad de valv abiertas
-     * @return long cantidad de valvulas abiertas de tanques cilindricos
-     * 
-     */
-    public long valvulasAbiertasC()
-    {
-        long numero =0;
-        for (Tanque tanque: contenedores)
-        {
-            if (tanque instanceof Cilindrico)
-            {
-                for(int i=0; i<10; i++)
-                {
-                    if (((Cilindrico)tanque).getValvulas()[i].getEstado() == true)   
-                    {
-                        numero +=1;
-                    }
-                }
-            }
-        }
-        return numero;
-    }
-    /**
      * Método para abrir la válvula de algún tanque
      * @param IDtanque : id del tanque
      * @param municipio municipio al que alimenta el tanque
@@ -174,24 +121,6 @@ public class Acueducto
             valvulas = tanque.getValvulas();
         }
         return valvulas;
-    }
-    /**
-     * Método para obtener la cantidad de agua restante o disponible para una region
-     * @param region: region del tanque
-     * @return double de la cantidad de agua disponible
-     * 
-     */
-    public double getAguaRegion(String region)
-    {
-        double agua =0;
-        for (Tanque tanque: contenedores)
-        {
-            if (tanque.getRegion().equals(region))
-            {
-                agua = tanque.getAguaRestante();
-            }
-        }
-        return agua;
     }
     /**
      * Método para llenar un tanque con agua

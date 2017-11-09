@@ -9,11 +9,6 @@ package Acueducto;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import org.mongodb.morphia.Morphia;
-import org.mongodb.morphia.Datastore;
-import org.mongodb.morphia.query.Query;
-import com.mongodb.MongoClient;
-import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -102,12 +97,11 @@ public class AcueductoUI extends javax.swing.JFrame {
         jLabel7 = new javax.swing.JLabel();
         numeroLT = new javax.swing.JTextField();
         llenarTanque = new javax.swing.JButton();
-        jLabel10 = new javax.swing.JLabel();
-        fechaLT = new com.toedter.calendar.JDateChooser();
         jPanel5 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         listaTanques = new javax.swing.JTextArea();
         mostrarTanques = new javax.swing.JButton();
+        jLabel11 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         regionCA = new javax.swing.JTextField();
@@ -481,8 +475,6 @@ public class AcueductoUI extends javax.swing.JFrame {
             }
         });
 
-        jLabel10.setText("Fecha de la acción");
-
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
@@ -490,37 +482,25 @@ public class AcueductoUI extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(jLabel7)
-                                .addGap(26, 26, 26)
-                                .addComponent(numeroLT, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGap(112, 112, 112)
-                                .addComponent(llenarTanque, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel7)
+                        .addGap(26, 26, 26)
+                        .addComponent(numeroLT, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel10)
-                        .addGap(45, 45, 45)
-                        .addComponent(fechaLT, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGap(100, 100, 100)
+                        .addComponent(llenarTanque, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addGap(33, 33, 33)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(numeroLT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel10)
-                    .addComponent(fechaLT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(llenarTanque)
-                .addGap(16, 16, 16))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Lista de tanques que actualmente tiene el acueducto"));
@@ -529,34 +509,42 @@ public class AcueductoUI extends javax.swing.JFrame {
         listaTanques.setRows(5);
         jScrollPane1.setViewportView(listaTanques);
 
-        mostrarTanques.setText("Mostrar lista de tanques");
+        mostrarTanques.setText("Actualizar lista de tanques");
         mostrarTanques.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 mostrarTanquesActionPerformed(evt);
             }
         });
 
+        jLabel11.setText("** Hacer clic en Actualizar después de cualquier cambio");
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(mostrarTanques)
+                .addGap(79, 79, 79))
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE)
+                    .addGroup(jPanel5Layout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
-            .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(86, 86, 86)
-                .addComponent(mostrarTanques, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(mostrarTanques)
-                .addGap(17, 17, 17))
+                .addGap(1, 1, 1)
+                .addComponent(jLabel11)
+                .addContainerGap())
         );
 
         jPanel6.setBorder(javax.swing.BorderFactory.createTitledBorder("Cantidad de agua disponible a para una región específica"));
@@ -628,10 +616,11 @@ public class AcueductoUI extends javax.swing.JFrame {
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(35, 35, 35)
                 .addComponent(cantidadValvulas, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(27, 27, 27)
                 .addComponent(mostrarValvulas, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -721,13 +710,22 @@ public class AcueductoUI extends javax.swing.JFrame {
         try 
         {
             porcentajeLow.porcentajeLow(db.getPorcentajeTanque(IDtanque));
-            db.abrirValvula(IDtanque, municipio, fecha);
-            JOptionPane.showMessageDialog(null, "La válvula indicada ha sido abierta con éxito.", "",JOptionPane.INFORMATION_MESSAGE);
+            if (db.abrirValvula(IDtanque, municipio, fecha) == true)
+            {
+                JOptionPane.showMessageDialog(null, "La válvula indicada ha sido abierta con éxito.", "",JOptionPane.INFORMATION_MESSAGE);
+            }
+            else 
+            {
+                JOptionPane.showMessageDialog(null, " La válvula que ha indicado no existe. \n Intente de nuevo.", "ERROR",JOptionPane.ERROR_MESSAGE);
+            }
         }
         catch(AguaBajaException exc)
         {
             JOptionPane.showMessageDialog(null, exc.getMessage(), "ALERTA",JOptionPane.ERROR_MESSAGE);
-            db.cerrarTodasValvulas(IDtanque, fecha);
+            if (exc.getPorcentaje() <= 10)
+            {
+                db.cerrarTodasValvulas(IDtanque, fecha);
+            }
         }
     }//GEN-LAST:event_abrirValvulaActionPerformed
 
@@ -746,78 +744,79 @@ public class AcueductoUI extends javax.swing.JFrame {
     }//GEN-LAST:event_numeroLTActionPerformed
 
     private void seguirNTanqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_seguirNTanqueActionPerformed
-        int i=0;
         
-         try {
-        Integer.parseInt(numeroNT.getText());
-        System.out.println("An integer");
-        i = 0;}
-        catch (NumberFormatException e) {
-        i=1;}
-        
-        if(i==0)
+        try 
         {
-        ingresarTanque.pack();
-        ingresarTanque.setVisible(true);
-            System.out.println("An integer");
-        
-        if (String.valueOf(formaCB.getSelectedItem()).equals("Cúbico"))
-        {
-            lado.setVisible(true);
-            dimCub.setVisible(true);
-            ladoCubico.setVisible(true);
-            largoO.setVisible(false);
-            anchoO.setVisible(false);
-            altoO.setVisible(false);
-            largoOrt.setVisible(false);
-            anchoOrt.setVisible(false);
-            altoOrt.setVisible(false);
-            dimOrt.setVisible(false);
-            dimCil.setVisible(false);
-            radio.setVisible(false);
-            radiotxt.setVisible(false);
-            altoCil.setVisible(false);
-            altocilin.setVisible(false);
+            if(numeroNT.getText().equals("") || regionNT.getText().equals(""))
+            {
+                JOptionPane.showMessageDialog(null, "No puede dejar espacios vacios. \n Porfavor ingrese los datos requeridos.", "ERROR",JOptionPane.ERROR_MESSAGE);
+            }
+            else
+            {
+                Long.parseLong(numeroNT.getText());
+                ingresarTanque.pack();
+                ingresarTanque.setVisible(true);
+
+                if (String.valueOf(formaCB.getSelectedItem()).equals("Cúbico"))
+                {
+                    lado.setVisible(true);
+                    dimCub.setVisible(true);
+                    ladoCubico.setVisible(true);
+                    largoO.setVisible(false);
+                    anchoO.setVisible(false);
+                    altoO.setVisible(false);
+                    largoOrt.setVisible(false);
+                    anchoOrt.setVisible(false);
+                    altoOrt.setVisible(false);
+                    dimOrt.setVisible(false);
+                    dimCil.setVisible(false);
+                    radio.setVisible(false);
+                    radiotxt.setVisible(false);
+                    altoCil.setVisible(false);
+                    altocilin.setVisible(false);
+                }
+                if (String.valueOf(formaCB.getSelectedItem()).equals("Ortogonal"))
+                {
+                    largoO.setVisible(true);
+                    anchoO.setVisible(true);
+                    altoO.setVisible(true);
+                    largoOrt.setVisible(true);
+                    anchoOrt.setVisible(true);
+                    altoOrt.setVisible(true);
+                    lado.setVisible(false);
+                    dimCub.setVisible(false);
+                    ladoCubico.setVisible(false);
+                    dimOrt.setVisible(false);
+                    dimCil.setVisible(false);
+                    radio.setVisible(false);
+                    radiotxt.setVisible(false);
+                    altoCil.setVisible(false);
+                    altocilin.setVisible(false);
+                }
+                if (String.valueOf(formaCB.getSelectedItem()).equals("Cilíndrico"))
+                {
+                    largoO.setVisible(false);
+                    anchoO.setVisible(false);
+                    altoO.setVisible(false);
+                    largoOrt.setVisible(false);
+                    anchoOrt.setVisible(false);
+                    altoOrt.setVisible(false);
+                    lado.setVisible(false);
+                    dimCub.setVisible(false);
+                    ladoCubico.setVisible(false);
+                    dimOrt.setVisible(false);
+                    dimCil.setVisible(true);
+                    radio.setVisible(true);
+                    radiotxt.setVisible(true);
+                    altoCil.setVisible(true);
+                    altocilin.setVisible(true);
+
+                }
+            }
         }
-        if (String.valueOf(formaCB.getSelectedItem()).equals("Ortogonal"))
+        catch (NumberFormatException e)
         {
-            largoO.setVisible(true);
-            anchoO.setVisible(true);
-            altoO.setVisible(true);
-            largoOrt.setVisible(true);
-            anchoOrt.setVisible(true);
-            altoOrt.setVisible(true);
-            lado.setVisible(false);
-            dimCub.setVisible(false);
-            ladoCubico.setVisible(false);
-            dimOrt.setVisible(false);
-            dimCil.setVisible(false);
-            radio.setVisible(false);
-            radiotxt.setVisible(false);
-            altoCil.setVisible(false);
-            altocilin.setVisible(false);
-        }
-        if (String.valueOf(formaCB.getSelectedItem()).equals("Cilíndrico"))
-        {
-            largoO.setVisible(false);
-            anchoO.setVisible(false);
-            altoO.setVisible(false);
-            largoOrt.setVisible(false);
-            anchoOrt.setVisible(false);
-            altoOrt.setVisible(false);
-            lado.setVisible(false);
-            dimCub.setVisible(false);
-            ladoCubico.setVisible(false);
-            dimOrt.setVisible(false);
-            dimCil.setVisible(true);
-            radio.setVisible(true);
-            radiotxt.setVisible(true);
-            altoCil.setVisible(true);
-            altocilin.setVisible(true);
-           
-        }}
-        else{
-            JOptionPane.showMessageDialog(null,"Solo puede ingresar numeros"); 
+            JOptionPane.showMessageDialog(null, "Porfavor ingrese los datos correctamente.", "ERROR",JOptionPane.ERROR_MESSAGE);
         }
         
     }//GEN-LAST:event_seguirNTanqueActionPerformed
@@ -832,11 +831,21 @@ public class AcueductoUI extends javax.swing.JFrame {
 
     private void llenarTanqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_llenarTanqueActionPerformed
         String numero = numeroLT.getText();
-        DateFormat date = new SimpleDateFormat("dd-MM-yyyy");
-        String fecha = date.format(calendarioAV.getDate());
-        db.updateLlenado(numero);
-        db.abrirTodasValvulas(numero, fecha);
-        JOptionPane.showMessageDialog(null, "Se ha llenado el tanque con éxito.", "",JOptionPane.INFORMATION_MESSAGE);
+        if(numeroLT.getText().equals(""))
+        {
+            JOptionPane.showMessageDialog(null, "No puede dejar espacios vacios. \n Porfavor ingrese los datos requeridos.", "ERROR",JOptionPane.ERROR_MESSAGE);
+        }
+        else 
+        {
+            if (db.updateLlenado(numero) == true)
+            {
+                JOptionPane.showMessageDialog(null, "Se ha llenado el tanque con éxito.", "",JOptionPane.INFORMATION_MESSAGE);
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, " El tanque que ha indicado no existe. \n Intente de nuevo.", "ERROR",JOptionPane.ERROR_MESSAGE);
+            }
+        }
     }//GEN-LAST:event_llenarTanqueActionPerformed
 
     private void mostrarAguaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarAguaActionPerformed
@@ -847,40 +856,194 @@ public class AcueductoUI extends javax.swing.JFrame {
     private void agregarTanqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarTanqueActionPerformed
         String[] municipios = new String[10];
         long[] habitantes = new long[10];
-        
-        JTextField[] texto = {municipio1,municipio2,municipio3,municipio4,municipio5,municipio6,municipio7,municipio8,municipio9,municipio10};
-        for (int t=0; t<10; t++)
-        {
-            municipios[t] = texto[t].getText().toUpperCase();
-            texto[t].setText("");
-        }
         JTextField[] hab = {habitantes1,habitantes2,habitantes3,habitantes4,habitantes5,habitantes6,habitantes7,habitantes8,habitantes9,habitantes10};
-        for (int k =0; k<10; k++)
+        JTextField[] texto = {municipio1,municipio2,municipio3,municipio4,municipio5,municipio6,municipio7,municipio8,municipio9,municipio10};
+        int i =0;
+        try 
         {
-            habitantes[k] = Long.parseLong(hab[k].getText());
-            hab[k].setText("");
+            String numero = numeroNT.getText();
+            String region = regionNT.getText().toUpperCase();
+            if (String.valueOf(formaCB.getSelectedItem()).equals("Cúbico"))
+            {
+                if(ladoCubico.getText().equals(""))
+                {
+                    JOptionPane.showMessageDialog(null, " No puede dejar espacios vacios. \n Porfavor ingrese los datos requeridos.", "ERROR",JOptionPane.ERROR_MESSAGE);
+                    i=1;
+                }
+                else
+                {
+                    for (int t=0; t<10; t++)
+                    {
+                        if (texto[t].getText().equals(""))
+                        {
+                            JOptionPane.showMessageDialog(null, " No puede dejar espacios vacios. \n Porfavor ingrese los datos requeridos.", "ERROR",JOptionPane.ERROR_MESSAGE);
+                            i=1;
+                            break;
+                        }
+                        else
+                        {
+                            municipios[t] = texto[t].getText().toUpperCase();
+                            for (int k =0; k<10; k++)
+                            {
+                                try 
+                                {
+                                    if(hab[k].getText().equals(""))
+                                    {
+                                        JOptionPane.showMessageDialog(null, "No puede dejar espacios vacios. \n Porfavor ingrese los datos requeridos.", "ERROR",JOptionPane.ERROR_MESSAGE);
+                                        i=1;
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        habitantes[k] = Long.parseLong(hab[k].getText());
+                                    }
+                                }
+                                catch (NumberFormatException e)
+                                {
+                                    JOptionPane.showMessageDialog(null, "Porfavor ingrese los datos correctamente.", "ERROR",JOptionPane.ERROR_MESSAGE);
+                                    i=1;
+                                    break;
+                                }
+                            }
+                        }
+
+                    }
+                    if(i ==0)
+                    {
+                        db.ingresarTanque("Cubico", numero, municipios, habitantes, region, 0.0, 0.0, 0.0, 0.0, 0.0, Double.parseDouble(ladoCubico.getText()));
+                        JOptionPane.showMessageDialog(null, "El tanque ha sido ingresado con éxito.", "",JOptionPane.INFORMATION_MESSAGE);
+                        ladoCubico.setText("");
+                        for (int l=0; l<10; l++)
+                        {
+                            hab[l].setText("");
+                            texto[l].setText("");
+                        }
+                    }
+                }
+            }
+            if (String.valueOf(formaCB.getSelectedItem()).equals("Ortogonal"))
+            {
+                if(anchoOrt.getText().equals("") || altoOrt.getText().equals("") || largoOrt.getText().equals("") )
+                {
+                    JOptionPane.showMessageDialog(null, "Porfavor ingrese los datos correctamente.", "ERROR",JOptionPane.ERROR_MESSAGE);
+                    i=1;
+                }
+                else
+                {
+                    for (int t=0; t<10; t++)
+                    {
+                        if (texto[t].getText().equals(""))
+                        {
+                            JOptionPane.showMessageDialog(null, "No puede dejar espacios vacios. \n Porfavor ingrese los datos requeridos.", "ERROR",JOptionPane.ERROR_MESSAGE);
+                            i=1;
+                            break;
+                        }
+                        else
+                        {
+                            municipios[t] = texto[t].getText().toUpperCase();
+                            try
+                            {
+                                for (int k =0; k<10; k++)
+                                {
+                                    if(hab[k].getText().equals(""))
+                                    {
+                                        JOptionPane.showMessageDialog(null, "No puede dejar espacios vacios. \n Porfavor ingrese los datos requeridos.", "ERROR",JOptionPane.ERROR_MESSAGE);
+                                        i=1;
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        habitantes[k] = Long.parseLong(hab[k].getText());
+                                    }
+                                }
+                            }
+                            catch (NumberFormatException e)
+                            {
+                                JOptionPane.showMessageDialog(null, "Porfavor ingrese los datos correctamente.", "ERROR",JOptionPane.ERROR_MESSAGE);
+                                i=1;
+                                break;
+                            }
+                        }
+                    }
+                    if (i==0)
+                    {
+                        db.ingresarTanque("Ortogonal", numero, municipios, habitantes, region, 0.0, 0.0, Double.parseDouble(anchoOrt.getText()), Double.parseDouble(altoOrt.getText()), Double.parseDouble(largoOrt.getText()), 0.0);
+                        JOptionPane.showMessageDialog(null, "El tanque ha sido ingresado con éxito.", "",JOptionPane.INFORMATION_MESSAGE);
+                        anchoOrt.setText("");
+                        altoOrt.setText("");
+                        largoOrt.setText("");
+                        for (int l=0; l<10; l++)
+                        {
+                            hab[l].setText("");
+                            texto[l].setText("");
+                        }
+                    }
+                }
+            }
+            if (String.valueOf(formaCB.getSelectedItem()).equals("Cilíndrico"))
+            {
+                if(radiotxt.getText().equals("") || altocilin.getText().equals(""))
+                {
+                    JOptionPane.showMessageDialog(null, "Porfavor ingrese los datos correctamente.", "ERROR",JOptionPane.ERROR_MESSAGE);
+                }
+                else
+                {
+                    for (int t=0; t<10; t++)
+                    {
+                        if (texto[t].getText().equals(""))
+                        {
+                            JOptionPane.showMessageDialog(null, "No puede dejar espacios vacios. \n Porfavor ingrese los datos requeridos.", "ERROR",JOptionPane.ERROR_MESSAGE);
+                            i=1;
+                            break;
+                        }
+                        else
+                        {
+                            municipios[t] = texto[t].getText().toUpperCase();
+                            for (int k =0; k<10; k++)
+                            {
+                                try 
+                                {
+                                    if(hab[k].getText().equals(""))
+                                    {
+                                        JOptionPane.showMessageDialog(null, "No puede dejar espacios vacios. \n Porfavor ingrese los datos requeridos.", "ERROR",JOptionPane.ERROR_MESSAGE);
+                                        i=1;
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        habitantes[k] = Long.parseLong(hab[k].getText());
+                                    }
+                                }
+                                catch (NumberFormatException e)
+                                {
+                                    JOptionPane.showMessageDialog(null, "Porfavor ingrese los datos correctamente.", "ERROR",JOptionPane.ERROR_MESSAGE);
+                                    i=1;
+                                    break;
+                                }
+                            }
+                        }
+                    }
+                    if(i==0)
+                    {
+                        db.ingresarTanque("Cilindrico", numero, municipios, habitantes, region, Double.parseDouble(radiotxt.getText()), Double.parseDouble(altocilin.getText()), 0.0, 0.0, 0.0, 0.0);
+                        JOptionPane.showMessageDialog(null, "El tanque ha sido ingresado con éxito.", "",JOptionPane.INFORMATION_MESSAGE);
+                        radiotxt.setText("");
+                        altocilin.setText("");
+                        for (int l=0; l<10; l++)
+                        {
+                            hab[l].setText("");
+                            texto[l].setText("");
+                        }
+                    }
+                }
+            }
         }
-        String numero = numeroNT.getText();
-        String region = regionNT.getText().toUpperCase();
-        if (String.valueOf(formaCB.getSelectedItem()).equals("Cúbico"))
+        catch(NumberFormatException e)
         {
-            db.ingresarTanque("Cubico", numero, municipios, habitantes, region, 0.0, 0.0, 0.0, 0.0, 0.0, Double.parseDouble(ladoCubico.getText()));
-            ladoCubico.setText("");
+            JOptionPane.showMessageDialog(null, "Porfavor ingrese los datos correctamente.", "ERROR",JOptionPane.ERROR_MESSAGE);
+
         }
-        if (String.valueOf(formaCB.getSelectedItem()).equals("Ortogonal"))
-        {
-            db.ingresarTanque("Ortogonal", numero, municipios, habitantes, region, 0.0, 0.0, Double.parseDouble(anchoOrt.getText()), Double.parseDouble(altoOrt.getText()), Double.parseDouble(largoOrt.getText()), 0.0);
-            anchoOrt.setText("");
-            altoOrt.setText("");
-            largoOrt.setText("");
-        }
-        if (String.valueOf(formaCB.getSelectedItem()).equals("Cilíndrico"))
-        {
-            db.ingresarTanque("Cilindrico", numero, municipios, habitantes, region, Double.parseDouble(radiotxt.getText()), Double.parseDouble(altocilin.getText()), 0.0, 0.0, 0.0, 0.0);
-        }
-        JOptionPane.showMessageDialog(null, "El tanque ha sido ingresado con éxito.", "",JOptionPane.INFORMATION_MESSAGE);
-        radiotxt.setText("");
-        altocilin.setText("");
+        
     }//GEN-LAST:event_agregarTanqueActionPerformed
 
     /**
@@ -934,7 +1097,6 @@ public class AcueductoUI extends javax.swing.JFrame {
     private javax.swing.JLabel dimCil;
     private javax.swing.JLabel dimCub;
     private javax.swing.JLabel dimOrt;
-    private com.toedter.calendar.JDateChooser fechaLT;
     private javax.swing.JComboBox<String> formaCB;
     private javax.swing.JTextField habitantes1;
     private javax.swing.JTextField habitantes10;
@@ -948,7 +1110,7 @@ public class AcueductoUI extends javax.swing.JFrame {
     private javax.swing.JTextField habitantes9;
     private javax.swing.JDialog ingresarTanque;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;

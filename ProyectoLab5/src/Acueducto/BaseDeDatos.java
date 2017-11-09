@@ -13,7 +13,6 @@ import java.util.List;
 import org.mongodb.morphia.Datastore;
 import org.mongodb.morphia.Morphia;
 import org.mongodb.morphia.query.Query;
-import org.mongodb.morphia.query.QueryResults;
 import org.mongodb.morphia.query.UpdateOperations;
 
 public class BaseDeDatos {
@@ -102,8 +101,9 @@ public class BaseDeDatos {
      * @param tanqueID: ID del tanque al que se quiere llenar
      * 
      */
-    public void updateLlenado(String tanqueID)
+    public boolean updateLlenado(String tanqueID)
     {
+        boolean existeTanque= false;
         ArrayList<Tanque> todosTanques = new ArrayList<>();
         Query<Ortogonal> query = ds.createQuery(Ortogonal.class).field("numero").equal(tanqueID);
         List<Ortogonal> busqueda = query.asList();
@@ -127,6 +127,7 @@ public class BaseDeDatos {
         {
             if (tanque.getID().equals(tanqueID))
             {
+                existeTanque = true;
                 if (tanque instanceof Ortogonal)
                 {
                     UpdateOperations upd = ds.createUpdateOperations(Ortogonal.class).set("cantAguaDisponible", acueducto.llenarTanque(tanqueID, todosTanques)).set("porcentajeAguaDisponible",100);
@@ -144,6 +145,7 @@ public class BaseDeDatos {
                 }
             }
         }
+        return existeTanque;
     }
     /**
      * Método para mostrar la cantidad de válvulas de todos los tanques cilíndricos que están abiertas
@@ -174,8 +176,10 @@ public class BaseDeDatos {
      * @param fecha: fecha en la cual se está abriendo la valvula
      * 
      */
-    public void abrirValvula(String IDtanque, String municipio, String fecha)
+    public boolean abrirValvula(String IDtanque, String municipio, String fecha)
     {
+        boolean existeValvula = false;
+        Valvula[] valvulas =null;
         ArrayList<Tanque> contenedores = new ArrayList<>();
         Query<Ortogonal> query = ds.createQuery(Ortogonal.class).field("numero").equal(IDtanque);
         List<Ortogonal> busqueda = query.asList();
@@ -197,34 +201,44 @@ public class BaseDeDatos {
         }
         for (Tanque tanque: contenedores)
         {
-            if (tanque.getID().equals(IDtanque))
+            valvulas = tanque.getValvulas();
+            for(int i =0; i<10; i++)
             {
-                if (tanque instanceof Ortogonal)
+                if (valvulas[i].getMunicipio().equals(municipio))
                 {
-                    UpdateOperations upd = ds.createUpdateOperations(Ortogonal.class).set("valvulas", acueducto.abrirValvula(IDtanque, municipio, fecha, contenedores));
-                    ds.update(query, upd,false);
-                    tanque.calcularPorcentaje();
-                    upd = ds.createUpdateOperations(Ortogonal.class).set("porcentajeAguaDisponible", tanque.getPorcentaje());
-                    ds.update(query, upd,false);
-                }
-                if (tanque instanceof Cilindrico)
-                {
-                    UpdateOperations upd = ds.createUpdateOperations(Cilindrico.class).set("valvulas", acueducto.abrirValvula(IDtanque, municipio, fecha, contenedores));
-                    ds.update(query2, upd,false);
-                    tanque.calcularPorcentaje();
-                    upd = ds.createUpdateOperations(Cilindrico.class).set("porcentajeAguaDisponible", tanque.getPorcentaje());
-                    ds.update(query2, upd,false);
-                }
-                if (tanque instanceof Cubico)
-                {
-                    UpdateOperations upd = ds.createUpdateOperations(Cubico.class).set("valvulas", acueducto.abrirValvula(IDtanque, municipio, fecha, contenedores));
-                    ds.update(query3, upd,false);
-                    tanque.calcularPorcentaje();
-                    upd = ds.createUpdateOperations(Cubico.class).set("porcentajeAguaDisponible", tanque.getPorcentaje());
-                    ds.update(query3, upd,false);
+                    existeValvula = true;
+                    if (tanque.getID().equals(IDtanque))
+                    {
+                        if (tanque instanceof Ortogonal)
+                        {
+                            UpdateOperations upd = ds.createUpdateOperations(Ortogonal.class).set("valvulas", acueducto.abrirValvula(IDtanque, municipio, fecha, contenedores));
+                            ds.update(query, upd,false);
+                            tanque.calcularPorcentaje();
+                            upd = ds.createUpdateOperations(Ortogonal.class).set("porcentajeAguaDisponible", tanque.getPorcentaje()).set("cantAguaDisponible", tanque.getAguaRestante());
+                            ds.update(query, upd,false);
+                        }
+                        if (tanque instanceof Cilindrico)
+                        {
+                            UpdateOperations upd = ds.createUpdateOperations(Cilindrico.class).set("valvulas", acueducto.abrirValvula(IDtanque, municipio, fecha, contenedores));
+                            ds.update(query2, upd,false);
+                            tanque.calcularPorcentaje();
+                            upd = ds.createUpdateOperations(Cilindrico.class).set("porcentajeAguaDisponible", tanque.getPorcentaje()).set("cantAguaDisponible", tanque.getAguaRestante());
+                            ds.update(query2, upd,false);
+                        }
+                        if (tanque instanceof Cubico)
+                        {
+                            UpdateOperations upd = ds.createUpdateOperations(Cubico.class).set("valvulas", acueducto.abrirValvula(IDtanque, municipio, fecha, contenedores));
+                            ds.update(query3, upd,false);
+                            tanque.calcularPorcentaje();
+                            upd = ds.createUpdateOperations(Cubico.class).set("porcentajeAguaDisponible", tanque.getPorcentaje()).set("cantAguaDisponible", tanque.getAguaRestante());
+                            ds.update(query3, upd,false);
+                        }
+                    }
                 }
             }
         }
+                
+        return existeValvula;
     }
     /**
      * Método para cerrar una válvula de un tanque específico
@@ -350,7 +364,6 @@ public class BaseDeDatos {
      * Método para cerrar todas las válvulas de un tanque cuyo porcentaje es menor a 10% de agua. 
      * @param ID: identificacion del tanque
      * @param fechacerrado: fecha en la que se está cerrando todas las valvulas
-     * 
      */
     public void cerrarTodasValvulas(String ID, String fechacerrado)
     {
@@ -379,43 +392,6 @@ public class BaseDeDatos {
             {
                 tanque.cerrarTodasValvulas(fechacerrado);
             }
-        }
-        
-    }
-    /**
-     * Método para abrir todas las válvulas de un tanque que ya está lleno.
-     * @param ID: identificacion del tanque
-     * @param fecha: fecha en la que se están abriendo todas las valvulas
-     * 
-     */
-    public void abrirTodasValvulas(String ID, String fecha)
-    {
-        ArrayList<Tanque> contenedores = new ArrayList<>();
-        Query<Ortogonal> query = ds.createQuery(Ortogonal.class);
-        List<Ortogonal> busqueda = query.asList();
-        for(Ortogonal orto: busqueda)
-        {
-            contenedores.add(orto);
-        }
-        Query<Cilindrico> query2 = ds.createQuery(Cilindrico.class);
-        List<Cilindrico> busqueda2 = query2.asList();
-        for(Cilindrico orto: busqueda2)
-        {
-            contenedores.add(orto);
-        }
-        Query<Cubico> query3 = ds.createQuery(Cubico.class);
-        List<Cubico> busqueda3 = query3.asList();
-        for(Cubico orto: busqueda3)
-        {
-            contenedores.add(orto);
-        }
-        for (Tanque tanque: contenedores)
-        {
-            if (tanque.getID().equals(ID))
-            {
-                tanque.abrirTodasValvulas(fecha);
-            }
-        }
-        
+        }   
     }
 }
