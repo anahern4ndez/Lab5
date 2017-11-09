@@ -102,6 +102,7 @@ public class AcueductoUI extends javax.swing.JFrame {
         listaTanques = new javax.swing.JTextArea();
         mostrarTanques = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
         jPanel6 = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         regionCA = new javax.swing.JTextField();
@@ -111,6 +112,7 @@ public class AcueductoUI extends javax.swing.JFrame {
         jPanel7 = new javax.swing.JPanel();
         cantidadValvulas = new javax.swing.JTextField();
         mostrarValvulas = new javax.swing.JButton();
+        jLabel12 = new javax.swing.JLabel();
 
         jPanel8.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Ingreso de datos del nuevo tanque", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.DEFAULT_POSITION));
 
@@ -500,7 +502,7 @@ public class AcueductoUI extends javax.swing.JFrame {
                     .addComponent(numeroLT, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(llenarTanque)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(41, Short.MAX_VALUE))
         );
 
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder("Lista de tanques que actualmente tiene el acueducto"));
@@ -518,32 +520,40 @@ public class AcueductoUI extends javax.swing.JFrame {
 
         jLabel11.setText("** Hacer clic en Actualizar después de cualquier cambio");
 
+        jLabel10.setText("y también al iniciar el programa");
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(mostrarTanques)
-                .addGap(79, 79, 79))
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addGap(86, 86, 86)
+                .addComponent(jLabel10)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 365, Short.MAX_VALUE)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jLabel11)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel5Layout.createSequentialGroup()
+                                .addGap(76, 76, 76)
+                                .addComponent(mostrarTanques))
+                            .addComponent(jLabel11))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 296, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(mostrarTanques)
-                .addGap(1, 1, 1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel11)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel10)
                 .addContainerGap())
         );
 
@@ -629,8 +639,11 @@ public class AcueductoUI extends javax.swing.JFrame {
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cantidadValvulas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(mostrarValvulas))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        jLabel12.setForeground(new java.awt.Color(0, 0, 153));
+        jLabel12.setText("La siguiente simulación representa un solo día de consumo de agua en el acueducto Albear.");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -638,32 +651,35 @@ public class AcueductoUI extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 681, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(16, 16, 16)
+                .addComponent(jLabel12)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -675,7 +691,7 @@ public class AcueductoUI extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(17, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -703,39 +719,67 @@ public class AcueductoUI extends javax.swing.JFrame {
     }//GEN-LAST:event_municipioAVActionPerformed
 
     private void abrirValvulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_abrirValvulaActionPerformed
-        String IDtanque = numeroAV.getText();
-        String municipio = municipioAV.getText().toUpperCase();
-        DateFormat date = new SimpleDateFormat("dd-MM-yyyy");
-        String fecha = date.format(calendarioAV.getDate());
-        try 
+        try
         {
-            porcentajeLow.porcentajeLow(db.getPorcentajeTanque(IDtanque));
-            if (db.abrirValvula(IDtanque, municipio, fecha) == true)
+            String IDtanque = numeroAV.getText();
+            String municipio = municipioAV.getText().toUpperCase();
+            DateFormat date = new SimpleDateFormat("dd-MM-yyyy");
+            String fecha = date.format(calendarioAV.getDate());
+            try 
             {
-                JOptionPane.showMessageDialog(null, "La válvula indicada ha sido abierta con éxito.", "",JOptionPane.INFORMATION_MESSAGE);
+                if(IDtanque.equals("") || municipio.equals(""))
+                {
+                    JOptionPane.showMessageDialog(null, "No puede dejar espacios vacios. \n Porfavor ingrese los datos requeridos.", "ERROR",JOptionPane.ERROR_MESSAGE);
+                }
+                else
+                {
+                    porcentajeLow.porcentajeLow(db.getPorcentajeTanque(IDtanque));
+                    if (db.abrirValvula(IDtanque, municipio, fecha) == true)
+                    {
+                        JOptionPane.showMessageDialog(null, "La válvula indicada ha sido abierta con éxito.", "",JOptionPane.INFORMATION_MESSAGE);
+                    }
+                    else 
+                    {
+                        JOptionPane.showMessageDialog(null, " La válvula que ha indicado no existe. \n Intente de nuevo.", "ERROR",JOptionPane.ERROR_MESSAGE);
+                    }
+                }
             }
-            else 
+            catch(AguaBajaException exc)
             {
-                JOptionPane.showMessageDialog(null, " La válvula que ha indicado no existe. \n Intente de nuevo.", "ERROR",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, exc.getMessage(), "ALERTA",JOptionPane.ERROR_MESSAGE);
+                if (exc.getPorcentaje() <= 10)
+                {
+                    db.cerrarTodasValvulas(IDtanque, fecha);
+                }
             }
         }
-        catch(AguaBajaException exc)
+        catch (NullPointerException e)
         {
-            JOptionPane.showMessageDialog(null, exc.getMessage(), "ALERTA",JOptionPane.ERROR_MESSAGE);
-            if (exc.getPorcentaje() <= 10)
-            {
-                db.cerrarTodasValvulas(IDtanque, fecha);
-            }
+            JOptionPane.showMessageDialog(null, "No puede dejar espacios vacios. \n Porfavor ingrese los datos requeridos.", "ERROR",JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_abrirValvulaActionPerformed
 
     private void cerrarValvulaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cerrarValvulaActionPerformed
-        String IDtanque = numeroAV.getText();
-        String municipio = municipioAV.getText().toUpperCase();
-        DateFormat date = new SimpleDateFormat("dd-MM-yyyy");
-        String fecha = date.format(calendarioAV.getDate());
-        db.cerrarValvula(IDtanque, municipio, fecha);
-        JOptionPane.showMessageDialog(null, "La válvula indicada ha sido cerrada con éxito.", "",JOptionPane.INFORMATION_MESSAGE);
+        try
+        {
+            String IDtanque = numeroAV.getText();
+            String municipio = municipioAV.getText().toUpperCase();
+            if(IDtanque.equals("") || municipio.equals(""))
+                {
+                    JOptionPane.showMessageDialog(null, "No puede dejar espacios vacios. \n Porfavor ingrese los datos requeridos.", "ERROR",JOptionPane.ERROR_MESSAGE);
+                }
+                else
+                {
+                    DateFormat date = new SimpleDateFormat("dd-MM-yyyy");
+                    String fecha = date.format(calendarioAV.getDate());
+                    db.cerrarValvula(IDtanque, municipio, fecha);
+                    JOptionPane.showMessageDialog(null, "La válvula indicada ha sido cerrada con éxito.", "",JOptionPane.INFORMATION_MESSAGE);
+                }
+        }
+        catch (NullPointerException e)
+        {
+            JOptionPane.showMessageDialog(null, "No puede dejar espacios vacios. \n Porfavor ingrese los datos requeridos.", "ERROR",JOptionPane.ERROR_MESSAGE);
+        }
         
     }//GEN-LAST:event_cerrarValvulaActionPerformed
 
@@ -850,7 +894,14 @@ public class AcueductoUI extends javax.swing.JFrame {
 
     private void mostrarAguaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_mostrarAguaActionPerformed
         String region = regionCA.getText().toUpperCase();
-        aguaCA.setText(String.valueOf(db.aguaDisponible(region))+ " m^3");
+        if (region.equals(""))
+        {
+            JOptionPane.showMessageDialog(null, "No puede dejar espacios vacios. \n Porfavor ingrese los datos requeridos.", "ERROR",JOptionPane.ERROR_MESSAGE);
+        }
+        else
+        {
+            aguaCA.setText(String.valueOf(db.aguaDisponible(region))+ " m^3");
+        }
     }//GEN-LAST:event_mostrarAguaActionPerformed
 
     private void agregarTanqueActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_agregarTanqueActionPerformed
@@ -1110,7 +1161,9 @@ public class AcueductoUI extends javax.swing.JFrame {
     private javax.swing.JTextField habitantes9;
     private javax.swing.JDialog ingresarTanque;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel2;
