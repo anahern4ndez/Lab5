@@ -99,7 +99,7 @@ public class BaseDeDatos {
     /**
      * Método para cambiarle los valores de un tanque a su 100% cuando éste se llena
      * @param tanqueID: ID del tanque al que se quiere llenar
-     * 
+     * @return boolean de si el tanque ingresado existe en la base de datos
      */
     public boolean updateLlenado(String tanqueID)
     {
@@ -174,6 +174,7 @@ public class BaseDeDatos {
      * @param IDtanque: tanque que contiene la válvula en cuestión
      * @param municipio: municipioal que alimenta la válvula
      * @param fecha: fecha en la cual se está abriendo la valvula
+     * @return boolean para ver si la valvula que ha ingresado el usuario existe en los tanques de la base de datos
      * 
      */
     public boolean abrirValvula(String IDtanque, String municipio, String fecha)
