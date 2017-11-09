@@ -119,7 +119,7 @@ public class Tanque {
         return cantAguaDisponible;
     }
     /**
-     * 
+     * Para cuando el porcentaje de agua esté a menos del 10%, se cierre el tanque por completo.
      * @param fecha: para guardar la fecha en la cual se cerraron todas las valvulas del tanque
      */
     public void cerrarTodasValvulas(String fecha)
@@ -128,18 +128,6 @@ public class Tanque {
         {
             valvulas[i].setEstado(false);
             valvulas[i].fechaCerrado(fecha);
-        }
-    }
-    /**
-     * 
-     * @param fecha: fecha en la cual se abren todas las valvulas (es decir cuando se llena el tanque)
-     */
-    public void abrirTodasValvulas(String fecha)
-    {
-        for (int i =0; i<10; i++)
-        {
-            valvulas[i].setEstado(true);
-            valvulas[i].fechaAbierto(fecha);
         }
     }
     /**
